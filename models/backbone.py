@@ -17,7 +17,7 @@ class Backbone(nn.Module):
         reduction: int,
         swav: bool,
         requires_grad: bool,
-        requires_grad: bool,
+        # requires_grad: bool,
     ):
 
         super(Backbone, self).__init__()
@@ -26,8 +26,8 @@ class Backbone(nn.Module):
             replace_stride_with_dilation=[False, False, dilation],
             pretrained=pretrained,
             norm_layer=FrozenBatchNorm2d,
-            pretrained=pretrained,
-            norm_layer=FrozenBatchNorm2d,
+            # pretrained=pretrained,
+            # norm_layer=FrozenBatchNorm2d,
         )
 
         self.backbone = resnet
@@ -37,8 +37,8 @@ class Backbone(nn.Module):
             checkpoint = torch.hub.load_state_dict_from_url(
                 "https://dl.fbaipublicfiles.com/deepcluster/swav_800ep_pretrain.pth.tar",
                 map_location="cpu",
-                "https://dl.fbaipublicfiles.com/deepcluster/swav_800ep_pretrain.pth.tar",
-                map_location="cpu",
+                # "https://dl.fbaipublicfiles.com/deepcluster/swav_800ep_pretrain.pth.tar",
+                # map_location="cpu",
             )
             state_dict = {k.replace("module.", ""): v for k, v in checkpoint.items()}
             self.backbone.load_state_dict(state_dict, strict=False)
@@ -50,7 +50,7 @@ class Backbone(nn.Module):
 
         for n, param in self.backbone.named_parameters():
             if "layer2" not in n and "layer3" not in n and "layer4" not in n:
-            if "layer2" not in n and "layer3" not in n and "layer4" not in n:
+            # if "layer2" not in n and "layer3" not in n and "layer4" not in n:
                 param.requires_grad_(False)
             else:
                 param.requires_grad_(requires_grad)
