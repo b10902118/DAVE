@@ -179,26 +179,35 @@ def train(args):
     )
     print("NUM STEPS", len(train_loader) * args.epochs)
 
+    accumulation_steps = 8
+
     for epoch in range(start_epoch + 1, args.epochs + 1):
         start = perf_counter()
         train_losses = {
+            k: torch.tensor(0.0).to(device) for k in criterion.losses.keys()
+        }
+        temp_train_losses = {
             k: torch.tensor(0.0).to(device) for k in criterion.losses.keys()
         }
         val_losses = {k: torch.tensor(0.0).to(device) for k in criterion.losses.keys()}
         aux_train_losses = {
             k: torch.tensor(0.0).to(device) for k in aux_criterion.losses.keys()
         }
+        temp_aux_train_losses = {
+            k: torch.tensor(0.0).to(device) for k in aux_criterion.losses.keys()
+        }
         aux_val_losses = {
             k: torch.tensor(0.0).to(device) for k in aux_criterion.losses.keys()
         }
         train_ae = torch.tensor(0.0).to(device)
+        temp_train_ae = torch.tensor(0.0).to(device)
         val_ae = torch.tensor(0.0).to(device)
         mAP = torch.tensor(0.0).to(device)
 
         model.train()
 
-        for img, bboxes, density_map, ids, scale_x, scale_y, _ in tqdm(
-            train_loader, desc="Training Progress", unit="batch"
+        for step, (img, bboxes, density_map, ids, scale_x, scale_y, _) in enumerate(
+            tqdm(train_loader, desc="Training Progress", unit="batch")
         ):
             img = img.to(device)
             bboxes = bboxes.to(device)
@@ -209,7 +218,7 @@ def train(args):
                 .resize((args.fcos_pred_size, args.fcos_pred_size))
             )
             targets.fields["labels"] = [1 for __ in range(args.batch_size * 2)]
-            optimizer.zero_grad()
+            # optimizer.zero_grad()
 
             outR, aux_R, tblr, location = model(img, bboxes)
 
@@ -231,20 +240,53 @@ def train(args):
                 + det_loss  # + l
             )
             loss.backward()
-            if args.max_grad_norm > 0:
-                nn.utils.clip_grad_norm_(model.parameters(), args.max_grad_norm)
-            optimizer.step()
-            train_losses = {
-                k: train_losses[k] + main_losses[k] * img.size(0)
+
+            # Accumulate metrics
+            temp_train_losses = {
+                k: temp_train_losses[k] + main_losses[k] * img.size(0)
                 for k in train_losses.keys()
             }
-            aux_train_losses = {
-                k: aux_train_losses[k] + sum([a[k] for a in aux_losses]) * img.size(0)
+            temp_aux_train_losses = {
+                k: temp_aux_train_losses[k] + sum([a[k] for a in aux_losses]) * img.size(0)
                 for k in aux_train_losses.keys()
             }
-            train_ae += torch.abs(
+            temp_train_ae += torch.abs(
                 density_map.flatten(1).sum(dim=1) - outR.flatten(1).sum(dim=1)
             ).sum()
+
+            # Perform optimizer step after accumulation_steps mini-batches
+            if (step + 1) % accumulation_steps == 0 or (step + 1) == len(train_loader):
+                        # Scale accumulated metrics
+                train_losses = {
+                    k: train_losses[k] + temp_train_losses[k] / (accumulation_steps * img.size(0))
+                    for k in train_losses.keys()
+                }
+                aux_train_losses = {
+                    k: aux_train_losses[k] + temp_aux_train_losses[k] / (accumulation_steps * img.size(0))
+                    for k in aux_train_losses.keys()
+                }
+                train_ae += temp_train_ae / accumulation_steps
+
+                # Reset temporary accumulators
+                temp_train_losses = {k: torch.tensor(0.0).to(device) for k in train_losses.keys()}
+                temp_aux_train_losses = {k: torch.tensor(0.0).to(device) for k in aux_train_losses.keys()}
+                temp_train_ae = torch.tensor(0.0).to(device)
+
+                if args.max_grad_norm > 0:
+                    nn.utils.clip_grad_norm_(model.parameters(), args.max_grad_norm)
+                optimizer.step()
+                optimizer.zero_grad()
+            # train_losses = {
+            #     k: train_losses[k] + main_losses[k] * img.size(0)
+            #     for k in train_losses.keys()
+            # }
+            # aux_train_losses = {
+            #     k: aux_train_losses[k] + sum([a[k] for a in aux_losses]) * img.size(0)
+            #     for k in aux_train_losses.keys()
+            # }
+            # train_ae += torch.abs(
+            #     density_map.flatten(1).sum(dim=1) - outR.flatten(1).sum(dim=1)
+            # ).sum()
 
         model.eval()
         with torch.no_grad():
@@ -312,7 +354,7 @@ def train(args):
                 "best_val_ae": val_ae.item() / len(val),
             }
             torch.save(
-                checkpoint, os.path.join(args.model_path, f"{args.det_model_name}.pth")
+                checkpoint, os.path.join(args.model_path, f"{args.det_model_name}1206.pth")
             )
             best_epoch = True
 
