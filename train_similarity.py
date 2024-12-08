@@ -122,8 +122,8 @@ def train(args):
         drop_last=False,
         num_workers=args.num_workers,
     )
-    
-    sim_logdir = "./sim_logdir"
+    # Change Path to save the log
+    sim_logdir = "./sim_logdir_2"
     os.makedirs(sim_logdir, exist_ok=True)
     print("NUM STEPS", len(train_loader) * args.epochs)
 
@@ -138,7 +138,7 @@ def train(args):
             img = img.to(device)
             bboxes = bboxes.to(device)
             optimizer.zero_grad()
-            loss, _, _ = model(img, bboxes)
+            loss, _ = model(img, bboxes)
 
             train_loss += loss
             loss.backward()
@@ -155,7 +155,7 @@ def train(args):
                 bboxes = bboxes.to(device)
 
                 optimizer.zero_grad()
-                loss, _, _ = model(img, bboxes)
+                loss, _ = model(img, bboxes)
                 val_loss += loss
                 data_num += 1
 
@@ -169,7 +169,8 @@ def train(args):
                 'scheduler': scheduler.state_dict(),
                 'best_val_ae': val_loss.item() / len(val)
         }
-        path_dir = os.path.join(args.model_path, "similarity")
+        # Change Path to save the checkpoint
+        path_dir = os.path.join(args.model_path, "similarity_2")
         os.makedirs(path_dir, exist_ok=True)
         path_name = os.path.join(path_dir, f'{args.det_model_name}_{epoch}.pth')
         torch.save( checkpoint, path_name)

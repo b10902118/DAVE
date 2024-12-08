@@ -47,7 +47,9 @@ To install and set up the DAVE environment, follow these steps:
 
 #### Test new model
     ```
-    CUDA_VISIBLE_DEVICES=2 python demo_zero.py --img_path /tmp2/r13922043/DAVE/material/458.jpg  --zero_shot --two_passes --skip_train --model_name DAVE_0_shot --model_path /tmp2/r13922043/DAVE/material  --backbone resnet50 --swav_backbone --reduction 8 --num_enc_layers 3 --num_dec_layers 3 --kernel_dim 3 --emb_dim 256 --num_objects 3 --num_workers 8 --use_objectness --use_appearance --batch_size 1 --pre_norm
+    $ CUDA_VISIBLE_DEVICES=3 python demo_zero.py --img_path ./material/741.jpg  --zero_shot --two_passes --skip_train --model_name DAVE_0_shot --model_path /tmp2/r13922043/DAVE/material  --backbone resnet50 --swav_backbone --reduction 8 --num_enc_layers 3 --num_dec_layers 3 --kernel_dim 3 --emb_dim 256 --num_objects 3 --num_workers 8 --use_objectness --use_appearance --batch_size 1 --pre_norm --prompt_shot
+
+    $ CUDA_VISIBLE_DEVICES=3 python demo.py --skip_train --model_name DAVE_3_shot --model_path /tmp2/r13922043/DAVE/material --backbone resnet50 --swav_backbone --reduction 8 --num_enc_layers 3 --num_dec_layers 3 --kernel_dim 3 --emb_dim 256 --num_objects 3 --num_workers 8 --use_query_pos_emb --use_objectness --use_appearance --batch_size 1 --pre_norm
     ```
 
 ## Citation

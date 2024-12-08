@@ -139,3 +139,6 @@ MNIST
 
 train_det_log
 visualizations
+**__out**
+*log*
+*png

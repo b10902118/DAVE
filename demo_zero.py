@@ -140,7 +140,8 @@ def demo(args):
         if args.show:
             plt.show()
         else:
-            out_file = args.out_path / f"{img_path.stem}__out.png"
+            out_file = args.out_path / f"{img_path.stem}__out_{scale_x}.png"
+            print("image will be saved to :",out_file)
             plt.savefig(out_file, bbox_inches="tight")
 
     if args.img_path.is_file():
@@ -160,4 +161,16 @@ if __name__ == "__main__":
     parser.add_argument("--show", action="store_true")
     parser.add_argument("--two_passes", action="store_true")
     args = parser.parse_args()
+    '''
+    image = Image.open(args.img_path).convert("RGB")
+    width, height = image.size
+    left = 0
+    top = 100
+    right = width -200
+    bottom = height -100
+    cropped_image = image.crop((left, top, right, bottom))
+    out_file = args.out_path / f"{args.img_path.stem}_3.png"
+    cropped_image.save(out_file)
+    args.img_path = out_file
+    '''
     demo(args)

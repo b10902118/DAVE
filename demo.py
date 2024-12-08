@@ -38,9 +38,9 @@ def on_release(event):
 
 @torch.no_grad()
 def demo(args):
-    img_path = "material//7.jpg"
+    img_path = "./material/741.jpg"
     global fig, ax
-
+    print("img_path",img_path)
     gpu = 0
     torch.cuda.set_device(gpu)
     device = torch.device(gpu)
@@ -78,7 +78,7 @@ def demo(args):
     img = img.unsqueeze(0).to(device)
     bboxes = bboxes.unsqueeze(0).to(device)
 
-    denisty_map, _, tblr, predicted_bboxes = model(img, bboxes=bboxes)
+    denisty_map, _, tblr, predicted_bboxes = model(img, bboxes=bboxes, evaluation=True)
 
     plt.clf()
     plt.imshow(image)

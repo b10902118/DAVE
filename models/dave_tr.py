@@ -6,6 +6,42 @@ from torchvision.ops import roi_align
 
 from .backbone import Backbone
 from .feat_comparison import Feature_Transform
+from sklearn.cluster import SpectralClustering
+import torch.nn.functional as F
+class WidthHeightNetwork(nn.Module):
+    def __init__(self, input_dim=6, hidden_dim=64, output_dim=64):
+        super(WidthHeightNetwork, self).__init__()
+
+        self.input_layer = nn.Sequential(
+            nn.Linear(input_dim, hidden_dim//2),
+            nn.ReLU(),
+            nn.Linear(hidden_dim//2, hidden_dim),
+            nn.ReLU()
+        )
+
+        self.hidden_layers = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU()
+        )
+
+        self.residual_layer = nn.Linear(hidden_dim, hidden_dim)
+
+        self.interaction_layer = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU()
+        )
+
+        self.output_layer = nn.Linear(hidden_dim, output_dim)
+
+    def forward(self, x):
+        x = self.input_layer(x)
+        hidden = self.hidden_layers(x)
+        hidden = hidden + self.residual_layer(x)
+        interacted_features = self.interaction_layer(hidden)
+        output = self.output_layer(interacted_features)
+        return output
 
 
 class COTR(nn.Module):
@@ -52,11 +88,28 @@ class COTR(nn.Module):
         )
         self.cos_loss = nn.CosineEmbeddingLoss(margin=0.0)
         self.feat_comp = Feature_Transform()
-
+        self.bbox_network = WidthHeightNetwork(input_dim=6, hidden_dim=64, output_dim=64)
     def forward(self, x, bboxes):
         # backbone
         backbone_features = self.backbone(x).detach()
+        # backbone feature : [batch size : 32, 3584, height : 64, wdith : 128]
         bs, _, bb_h, bb_w = backbone_features.size()
+
+        # bboxes : [32, 6, 4] = [batch size, interest number, (x,y,x1,y1)]
+        # 6 (number of bounding boxes per image): 
+        # Each image has 6 bounding boxes or regions of interest.
+
+        # Get shape of objectness
+        box_hw = torch.zeros(bboxes.size(0), bboxes.size(1), 6).to(bboxes.device)
+        box_hw[:, :, 0] = bboxes[:, :, 2] - bboxes[:, :, 0] # width
+        box_hw[:, :, 1] = bboxes[:, :, 3] - bboxes[:, :, 1] # height
+        box_hw[:, :, 2] = box_hw[:, :, 0] * box_hw[:, :, 1]
+        box_hw[:, :, 3] = box_hw[:, :, 0] / box_hw[:, :, 1]
+        box_hw[:, :, 4] = box_hw[:, :, 0] + box_hw[:, :, 1]
+        box_hw[:, :, 5] = torch.sqrt(box_hw[:, :, 0] ** 2 + box_hw[:, :, 1] ** 2)
+
+        # box_hw : [32, 6, 2] -> shape_or_objectness : [32, 6, 2304]
+        shape_or_objectness = self.bbox_network(box_hw)
 
         bboxes_ = torch.cat(
             [
@@ -68,37 +121,46 @@ class COTR(nn.Module):
             ],
             dim=1,
         )
-
-        feat_vectors = (
-            roi_align(
+        # bboxes_ : 192, 5 [batch size x interest number, (id,x,y,x1,y1)]
+        ROI_feature = roi_align(
                 backbone_features,
                 boxes=bboxes_,
                 output_size=self.kernel_dim,
                 spatial_scale=1.0 / self.reduction,
                 aligned=True,
             )
-            .permute(0, 2, 3, 1)
-            .reshape(bs, 6, 3, 3, -1)
-            .permute(0, 1, 4, 2, 3)
-        )
-        feat_pairs = (
-            self.feat_comp(feat_vectors.reshape(bs * 6, 3584, 3, 3))
-            .reshape(bs, 6, -1)
-            .permute(1, 0, 2)
-        )
+        # Orifinal ROI_feature : [batchsize(32) * interest number(6), 3584, 3, 3]
+        ROI_feature = ROI_feature.permute(0, 2, 3, 1)
+        # After ROI_feature : [batchsize(32) * interest number(6), 3, 3, 3584]
+        ROI_feature_reshpae = ROI_feature.reshape(bs, 6, 3, 3, -1)
+        # ROI_feature_reshpae : [batchsize(32), interest number(6), 3, 3, 3584]
+        feat_vectors = ROI_feature_reshpae.permute(0, 1, 4, 2, 3)
+        # feat_vectors : [batchsize(32), interest number(6), 3584, 3, 3]
+        feat_embedding = self.feat_comp(feat_vectors.reshape(bs * 6, 3584, 3, 3))
+        # feat_embedding : [batchsize(32) * interest number(6), 6400] -> [batchsize(32), interest number(6), 6400]
+        feat_embedding = feat_embedding.reshape(bs, 6, -1)
+        # feat_pairs : [6, 32, 6400]
+        feat_pairs = feat_embedding.permute(1, 0, 2)
+        shape_or_objectness = shape_or_objectness.permute(1, 0, 2)
+        combined_features = torch.cat((feat_pairs, shape_or_objectness), dim=-1)
+
         sim = list()
         class_ = []
         loss = torch.tensor(0.0).to(feat_pairs.device)
         o = torch.tensor(1).to(feat_pairs.device)
         n = torch.tensor(-1).to(feat_pairs.device)
+        # combined_features reshape to [batchsize(32) * interest number(6), 6464]
+        combined_features = combined_features.view(-1, combined_features.shape[-1])       
 
-        for f1, f2 in itertools.combinations(zip(feat_pairs, [1, 1, 1, 2, 2, 2]), 2):
-            for i in range(f1[0].shape[0]):
-                loss += self.cos_loss(f1[0][i], f2[0][i], o if f1[1] == f2[1] else n)
-            sim.append(self.cosine_sim(f1[0], f2[0]))
-            class_.append([f1[1] == f2[1] for _ in range(bs)])
-
-        return loss, sim, class_
+        for f1, f2 in itertools.combinations(zip(combined_features), 2):
+            # cosine similarity
+            f1_tensor, f2_tensor= f1[0], f2[0]      
+            # Calculate cosine similarity
+            sim_value = F.cosine_similarity(f1_tensor, f2_tensor, dim=0, eps=1e-8)
+            loss += self.cos_loss(f1_tensor, f2_tensor, sim_value) 
+        
+            sim.append(sim_value.item())
+        return loss, sim
 
 
 def build_model(args):

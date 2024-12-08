@@ -143,6 +143,7 @@ class COTR(nn.Module):
 
         self.pos_emb = PositionalEncodingsFixed(emb_dim)
         if not self.det_train:
+            # Verification Stage
             self.feat_comp = Feature_Transform()
         if self.use_objectness:
             if not self.zero_shot:
@@ -330,7 +331,7 @@ class COTR(nn.Module):
         #    dim=1,
         # )
 
-        # Extract the objectness
+        # Extract the objectness of Visual Examplars
         if self.use_objectness and not self.zero_shot:
             box_hw = torch.zeros(bboxes.size(0), bboxes.size(1), 2).to(bboxes.device)
             box_hw[:, :, 0] = bboxes[:, :, 2] - bboxes[:, :, 0]
@@ -361,6 +362,7 @@ class COTR(nn.Module):
                 ],
                 dim=1,
             )
+            # Extract the Bounding Box
             appearance = (
                 roi_align(
                     x,
@@ -459,7 +461,7 @@ class COTR(nn.Module):
             outputs_R.append(_x)
         return correlation_maps, outputs_R, outputR
 
-    def forward(self, x_img, bboxes, name="", dmap=None, classes=None):
+    def forward(self, x_img, bboxes, name="", dmap=None, classes=None, evaluation = False):
         self.num_objects = bboxes.shape[1]
         backbone_features = self.backbone(x_img)  # (batch_size, 2048, H/32, W/32)
         bs, _, bb_h, bb_w = backbone_features.size()
@@ -511,11 +513,12 @@ class COTR(nn.Module):
             ],
             dim=1,
         ).to(backbone_features.device)
-
+        print("Detection Stage End")
         #####################
         # VERIFICATION STAGE
         #####################
         if not self.zero_shot:
+            # bboxes is the exemplar
             bboxes_ = torch.cat(
                 [
                     torch.arange(bs)
@@ -526,10 +529,25 @@ class COTR(nn.Module):
                 ],
                 dim=1,
             )
+            examplar_bboxes_ = bboxes_
             bboxes_ = torch.cat([bboxes_, bboxes_pred])
         else:
             bboxes_ = bboxes_pred
 
+        # Examplar_vector
+        examplar_vecors = (
+            roi_align(
+                backbone_features,
+                boxes=examplar_bboxes_,
+                output_size=self.kernel_dim,
+                spatial_scale=1.0 / self.reduction,
+                aligned=True,
+            )
+            .permute(0, 2, 3, 1)
+            .reshape(1, examplar_bboxes_.shape[0], 3, 3, -1)
+            .permute(0, 1, 4, 2, 3)
+        )
+        # Examplar_vector and Bounding Box Feature
         feat_vectors = (
             roi_align(
                 backbone_features,
@@ -567,10 +585,10 @@ class COTR(nn.Module):
             self.cosine_sim(feat_pairs[None, :], feat_pairs[:, None]).cpu().numpy()
         )
         dst_mtx[dst_mtx < 0] = 0
-
+        print("Verification Stage")
         if self.zero_shot and self.prompt_shot:
+            print("Zero Shot and Prompt Shot")
             preds = generated_bboxes
-
             k, _, _ = self.eigenDecomposition(dst_mtx)
             if len(k) > 1 or (len(k) > 1 and k[0] > 1):
                 n_clusters_ = max(k)
@@ -604,6 +622,7 @@ class COTR(nn.Module):
             return outputR, [], tblr, preds
 
         elif self.zero_shot and not self.prompt_shot:
+            print("Zero Shot and Not Prompt Shot")
             k, _, _ = self.eigenDecomposition(dst_mtx)
             preds = generated_bboxes
             if len(k) > 1 or (len(k) > 1 and k[0] > 1):
@@ -632,11 +651,9 @@ class COTR(nn.Module):
 
         else:
             dst_mtx[dst_mtx < 0] = 0  # similarity matrix
-
             k, _, _ = self.eigenDecomposition(dst_mtx)
             exemplar_bboxes = generated_bboxes
             mask = None
-            # print(f"{k=}")
             if len(k) > 1 or k[0] > 1:
 
                 n_clusters_ = max(k)

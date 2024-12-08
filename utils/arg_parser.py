@@ -38,7 +38,7 @@ def get_argparser():
     parser.add_argument("--task", default="fscd147", type=str)
     parser.add_argument("--d_s", default=1.0, type=float)
     parser.add_argument("--m_s", default=0.0, type=float)
-    parser.add_argument("--i_thr", default=0.55, type=float)
+    parser.add_argument("--i_thr", default=0.1, type=float)
     parser.add_argument("--d_t", default=3, type=float)
     parser.add_argument("--s_t", default=0.008, type=float)
     parser.add_argument("--norm_s", action="store_true")
