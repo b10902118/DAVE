@@ -53,9 +53,14 @@ def mask_density(image_batch, boxes_batch, img=None):
     for box in boxes_batch.box.long():
         x1, y1, x2, y2 = box
         mask_tensor[:, y1:y2, x1:x2] = 1
-    max_bbx = boxes_batch[
-        torch.where(torch.median(boxes_batch.area()) == boxes_batch.area())[0].item()
-    ].box
+    median_area = torch.median(boxes_batch.area())
+    _, idx = torch.min((boxes_batch.area() - median_area).abs(), dim=0)
+    max_bbx = boxes_batch[idx].box
+    # print(torch.where(torch.median(boxes_batch.area())==boxes_batch.area())[0])
+    # print(idx)
+    # max_bbx = boxes_batch[
+    #     torch.where(torch.median(boxes_batch.area()) == boxes_batch.area())[0].item()
+    # ].box
     max_wh_half = (
         2 * math.floor((max_bbx[3] - max_bbx[1]) / 2 / 2) + 1,
         2 * math.floor((max_bbx[2] - max_bbx[0]) / 2 / 2) + 1,
