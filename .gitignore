@@ -139,8 +139,3 @@ MNIST
 
 train_det_log
 visualizations
-<<<<<<< HEAD
-**__out**
-=======
-*log*
->>>>>>> d0cb8d6 (Remove distributed training of similarity model)

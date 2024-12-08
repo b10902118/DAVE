@@ -68,12 +68,5 @@ class Backbone(nn.Module):
             ],
             dim=1,
         )
-        x = torch.cat(
-            [
-                F.interpolate(f, size=size, mode="bilinear", align_corners=True)
-                for f in [layer2, layer3, layer4]
-            ],
-            dim=1,
-        )
 
         return x
