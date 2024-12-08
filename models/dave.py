@@ -16,6 +16,7 @@ from utils.helpers import mask_density, extend_bboxes
 from .backbone import Backbone
 from .box_prediction import FCOSHead, BoxList, boxlist_nms
 from .feat_comparison import Feature_Transform
+from .boundingbox import BBOX_Network
 from .positional_encoding import PositionalEncodingsFixed
 from .regression_head import DensityMapRegressor
 from .transformer import TransformerEncoder, TransformerDecoder
@@ -145,6 +146,7 @@ class COTR(nn.Module):
         if not self.det_train:
             # Verification Stage
             self.feat_comp = Feature_Transform()
+            self.bbox_network = BBOX_Network(input_dim=6, hidden_dim=64, output_dim=64)
         if self.use_objectness:
             if not self.zero_shot:
                 self.objectness = nn.Sequential(
@@ -531,6 +533,7 @@ class COTR(nn.Module):
             )
             examplar_bboxes_ = bboxes_
             bboxes_ = torch.cat([bboxes_, bboxes_pred])
+            print("bboxes_.size", bboxes.shape)
         else:
             bboxes_ = bboxes_pred
 
@@ -567,6 +570,12 @@ class COTR(nn.Module):
             .permute(1, 0, 2)
         )
 
+        bbox_embedding = self.bbox_network(bboxes_.unsqueeze(0))
+        bbox_embedding = bbox_embedding.permute(1, 0, 2)
+        combined_features = torch.cat((feat_pairs, bbox_embedding), dim=-1)
+        # Use combined_features as feat_pairs
+        # [bounding box, batch size, 6464]
+        feat_pairs = combined_features
         # Speed up, nothing changes
         if len(feat_pairs) > 500:
             outputR_no_mask = outputR.clone()
@@ -650,6 +659,7 @@ class COTR(nn.Module):
             return outputR, [], tblr, preds
 
         else:
+            print("Free Shot")
             dst_mtx[dst_mtx < 0] = 0  # similarity matrix
             k, _, _ = self.eigenDecomposition(dst_mtx)
             exemplar_bboxes = generated_bboxes

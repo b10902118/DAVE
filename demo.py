@@ -26,8 +26,12 @@ def on_release(event):
     global ix, iy
     x, y = event.xdata, event.ydata
     # Calculate the width and height of the bounding box
-    width = x - ix
-    height = y - iy
+    width = abs(x - ix)
+    height = abs(y - iy)
+    if ix > x :
+        ix = x
+    if iy > y :
+        iy = y
     # Add a rectangle patch to the axes
     rect = patches.Rectangle((ix, iy), width, height, edgecolor="r", facecolor="none")
     ax.add_patch(rect)
@@ -52,14 +56,24 @@ def demo(args):
         torch.load(os.path.join(args.model_path, "DAVE_3_shot.pth"))["model"],
         strict=False,
     )
+    verification_path = "/project/g/r13922043/dave_model/similarity_2/verification_18.pth"
     pretrained_dict_feat = {
         k.split("feat_comp.")[1]: v
-        for k, v in torch.load(os.path.join(args.model_path, "verification.pth"))[
+        for k, v in torch.load(verification_path)[
             "model"
         ].items()
         if "feat_comp" in k
     }
+    pretrained_dict_bbox = {
+        k.split("bbox_network.")[1]: v
+        for k, v in torch.load(verification_path)[
+            "model"
+        ].items()
+        if "bbox_network" in k
+    }
+    print("Verification model path : ",verification_path)
     model.module.feat_comp.load_state_dict(pretrained_dict_feat)
+    model.module.bbox_network.load_state_dict(pretrained_dict_bbox)
     model.eval()
 
     image = Image.open(img_path).convert("RGB")

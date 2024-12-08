@@ -44,7 +44,7 @@ def demo(args):
         torch.load(os.path.join(args.model_path, "DAVE_0_shot.pth"))["model"],
         strict=False,
     )
-    path = '/project/g/r13922043/dave_model/similarity/verification_49.pth'
+    path = '/project/g/r13922043/dave_model/similarity_2/verification_18.pth'
     pretrained_dict_feat = {
         k.split("feat_comp.")[1]: v
         for k, v in torch.load(path)[
@@ -53,6 +53,7 @@ def demo(args):
         if "feat_comp" in k
     }
     model.module.feat_comp.load_state_dict(pretrained_dict_feat)
+    model.module.
     model.eval()
 
     bboxes = torch.zeros((1, 3, 4))

@@ -6,43 +6,9 @@ from torchvision.ops import roi_align
 
 from .backbone import Backbone
 from .feat_comparison import Feature_Transform
+from .boundingbox import BBOX_Network
 from sklearn.cluster import SpectralClustering
 import torch.nn.functional as F
-class WidthHeightNetwork(nn.Module):
-    def __init__(self, input_dim=6, hidden_dim=64, output_dim=64):
-        super(WidthHeightNetwork, self).__init__()
-
-        self.input_layer = nn.Sequential(
-            nn.Linear(input_dim, hidden_dim//2),
-            nn.ReLU(),
-            nn.Linear(hidden_dim//2, hidden_dim),
-            nn.ReLU()
-        )
-
-        self.hidden_layers = nn.Sequential(
-            nn.Linear(hidden_dim, hidden_dim),
-            nn.ReLU(),
-            nn.Linear(hidden_dim, hidden_dim),
-            nn.ReLU()
-        )
-
-        self.residual_layer = nn.Linear(hidden_dim, hidden_dim)
-
-        self.interaction_layer = nn.Sequential(
-            nn.Linear(hidden_dim, hidden_dim),
-            nn.ReLU()
-        )
-
-        self.output_layer = nn.Linear(hidden_dim, output_dim)
-
-    def forward(self, x):
-        x = self.input_layer(x)
-        hidden = self.hidden_layers(x)
-        hidden = hidden + self.residual_layer(x)
-        interacted_features = self.interaction_layer(hidden)
-        output = self.output_layer(interacted_features)
-        return output
-
 
 class COTR(nn.Module):
 
@@ -88,7 +54,7 @@ class COTR(nn.Module):
         )
         self.cos_loss = nn.CosineEmbeddingLoss(margin=0.0)
         self.feat_comp = Feature_Transform()
-        self.bbox_network = WidthHeightNetwork(input_dim=6, hidden_dim=64, output_dim=64)
+        self.bbox_network = BBOX_Network(input_dim=6, hidden_dim=64, output_dim=64)
     def forward(self, x, bboxes):
         # backbone
         backbone_features = self.backbone(x).detach()
@@ -100,16 +66,7 @@ class COTR(nn.Module):
         # Each image has 6 bounding boxes or regions of interest.
 
         # Get shape of objectness
-        box_hw = torch.zeros(bboxes.size(0), bboxes.size(1), 6).to(bboxes.device)
-        box_hw[:, :, 0] = bboxes[:, :, 2] - bboxes[:, :, 0] # width
-        box_hw[:, :, 1] = bboxes[:, :, 3] - bboxes[:, :, 1] # height
-        box_hw[:, :, 2] = box_hw[:, :, 0] * box_hw[:, :, 1]
-        box_hw[:, :, 3] = box_hw[:, :, 0] / box_hw[:, :, 1]
-        box_hw[:, :, 4] = box_hw[:, :, 0] + box_hw[:, :, 1]
-        box_hw[:, :, 5] = torch.sqrt(box_hw[:, :, 0] ** 2 + box_hw[:, :, 1] ** 2)
-
-        # box_hw : [32, 6, 2] -> shape_or_objectness : [32, 6, 2304]
-        shape_or_objectness = self.bbox_network(box_hw)
+        shape_or_objectness = self.bbox_network(bboxes)
 
         bboxes_ = torch.cat(
             [
