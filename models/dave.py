@@ -293,7 +293,7 @@ class COTR(nn.Module):
 
         # # prepare the encoder input
         src = self.input_proj(backbone_features)
-        bs, c, h, w = src.size()
+        bs, c, h, w = src.size()  # c = 256
         pos_emb = self.pos_emb(bs, h, w, src.device).flatten(2).permute(2, 0, 1)
         src = src.flatten(2).permute(2, 0, 1)
 
@@ -409,54 +409,46 @@ class COTR(nn.Module):
 
         # prepare regression decoder input
         x = memory.permute(1, 2, 0).reshape(-1, self.emb_dim, bb_h, bb_w)
+        x_repeated = torch.cat([x] * self.num_objects, dim=1).flatten(0, 1).unsqueeze(0)
 
-        outputs_R = list()
+        outputs_R = []
         for i in range(weights.size(0)):
             kernels = (
-                weights[i, ...]
+                weights[i]
                 .permute(1, 0, 2)
                 .reshape(bs, self.num_objects, self.kernel_dim, self.kernel_dim, -1)
                 .permute(0, 1, 4, 2, 3)
                 .flatten(0, 2)[:, None, ...]
             )
-            if self.num_objects > 1 and not self.zero_shot:
-                correlation_maps = F.conv2d(
-                    torch.cat([x for _ in range(self.num_objects)], dim=1)
-                    .flatten(0, 1)
-                    .unsqueeze(0),
-                    kernels,
-                    bias=None,
-                    padding=self.kernel_dim // 2,
-                    groups=kernels.size(0),
-                ).view(bs, self.num_objects, self.emb_dim, bb_h, bb_w)
-                softmaxed_correlation_maps = correlation_maps.softmax(dim=1)
-                correlation_maps = torch.mul(
-                    softmaxed_correlation_maps, correlation_maps
-                ).sum(dim=1)
-            else:
-                correlation_maps = (
-                    F.conv2d(
-                        torch.cat([x for _ in range(self.num_objects)], dim=1)
-                        .flatten(0, 1)
-                        .unsqueeze(0),
-                        kernels,
-                        bias=None,
-                        padding=self.kernel_dim // 2,
-                        groups=kernels.size(0),
-                    )
-                    .view(bs, self.num_objects, self.emb_dim, bb_h, bb_w)
-                    .max(dim=1)[0]
-                )
 
-            # send through regression head
+            conv2d_params = {
+                "input": x_repeated,
+                "weight": kernels,
+                "bias": None,
+                "padding": self.kernel_dim // 2,
+                "groups": kernels.size(0),
+            }
+
+            correlation_maps = F.conv2d(**conv2d_params).view(
+                bs, self.num_objects, self.emb_dim, bb_h, bb_w
+            )
+
+            if self.num_objects > 1 and not self.zero_shot:
+                softmaxed_correlation_maps = correlation_maps.softmax(dim=1)
+                correlation_maps = (softmaxed_correlation_maps * correlation_maps).sum(
+                    dim=1
+                )
+            else:
+                correlation_maps = correlation_maps.max(dim=1)[0]
+
             if i == weights.size(0) - 1:  # last iteration
-                # send through regression head
                 _x = self.regression_head(correlation_maps)
-                outputR = _x.clone()  # self.regression_head(correlation_maps)
+                outputR = _x.clone()
             else:
                 _x = self.aux_heads[i](correlation_maps)
 
             outputs_R.append(_x)
+
         return correlation_maps, outputs_R, outputR
 
     def forward(self, x_img, bboxes, name="", dmap=None, classes=None):
