@@ -3,6 +3,7 @@ import math
 import numpy as np
 import skimage
 import torch
+import os
 from PIL import Image
 from numpy import linalg as LA
 from scipy.sparse import csgraph
@@ -11,6 +12,8 @@ from torch import nn
 from torch.nn import functional as F
 from torchvision.ops import box_iou
 from torchvision.ops import roi_align
+from segment_anything import sam_model_registry, SamPredictor
+from segment_anything.utils.transforms import ResizeLongestSide
 
 from utils.helpers import mask_density, extend_bboxes
 from .backbone import Backbone
@@ -57,6 +60,7 @@ class COTR(nn.Module):
         egv: float,
         norm_s: bool,
         det_train: bool,
+        sam
     ):
 
         super(COTR, self).__init__()
@@ -160,6 +164,10 @@ class COTR(nn.Module):
                 )
                 nn.init.normal_(self.objectness)
 
+        self.sam = sam
+        self.sam_predictor = SamPredictor(sam)
+        self.sam_transform = ResizeLongestSide(sam.image_encoder.img_size)
+
     def clip_check_clusters(self, img, bboxes, category, img_name=None):
         bboxes = extend_bboxes(bboxes)
 
@@ -187,6 +195,92 @@ class COTR(nn.Module):
         logits_per_image = outputs.logits_per_image
 
         return logits_per_image[0]
+    
+    def sam_generate_bbox(self, imgs, density_map, gt_dmap=None):
+        def prepare_image(image, transform, device):
+            mean = torch.tensor([0.485, 0.456, 0.406]).view(3, 1, 1)
+            std = torch.tensor([0.229, 0.224, 0.225]).view(3, 1, 1)
+            image = image.cpu() * std + mean
+            image = image.clamp(0, 1).permute(1, 2, 0).numpy()
+            image = (image * 255).astype(np.uint8)
+ 
+            image = transform.apply_image(image)
+            image = torch.as_tensor(image, device=device)
+            return image.permute(2, 0, 1).contiguous()
+ 
+        if gt_dmap is not None:
+            density_map = gt_dmap
+        local_max = [] 
+        bboxes = []
+        for i in range(density_map.shape[0]):
+            dmap = np.array((density_map)[i][0].cpu())
+ 
+            mask = dmap < min(np.max(dmap) / self.d_t, self.s_t)
+            dmap[mask] = 0
+            a = skimage.feature.peak_local_max(dmap, exclude_border=0) # (num_local_max, 2)
+            local_max.append(torch.from_numpy(a).to(self.sam.device)) 
+ 
+ 
+ 
+        batched_input = [
+            {
+                'image': prepare_image(img, self.sam_transform, self.sam.device),
+                'original_size': img.shape[-2:],
+                'point_coords': self.sam_transform.apply_coords_torch(points.flip(dims = [1]), img.shape[-2:]).unsqueeze(1),
+                'point_labels': torch.ones((points.shape[0], 1), device=self.sam.device)
+            } 
+            for img, points in zip(imgs, local_max)
+        ] 
+ 
+        batched_output = self.sam(batched_input, multimask_output=False) # 'masks': (B, 1, H, W), 'iou_predictions': (B, 1)
+ 
+ 
+ 
+        for output in batched_output:
+            masks = output['masks'].squeeze(1)
+            scores = output['iou_predictions'].squeeze(1).tolist()
+            boxes = []
+ 
+ 
+ 
+            for i, mask in enumerate(masks):
+                rows = torch.any(mask, dim=1).nonzero().squeeze()
+                cols = torch.any(mask, dim=0).nonzero().squeeze()
+                if rows.numel() == 0 or cols.numel() == 0:
+                    box = [0, 0, 0, 0]
+                else:
+                    box = [cols.min().item(), rows.min().item(), cols.max().item(), rows.max().item()]
+                boxes.append(box)
+ 
+                '''
+ 
+                im_shape = mask.shape + (3,)
+                im = np.zeros(im_shape, dtype = np.uint8)
+                p = local_max[0][i]
+                im[mask.cpu().numpy()] =[255,255,255]
+                im[p[0], p[1]] = [255, 0, 0]
+                im[rows.min().item(),:] = [0, 255, 0]
+                im[rows.max().item(),:] = [0, 255, 0]
+                im[:,cols.min().item()] = [0, 255, 0]
+                im[:,cols.max().item()] = [0, 255, 0]
+ 
+ 
+                im = Image.fromarray(im)
+                im.save(f'mask{i}.png')
+                '''
+ 
+            print('boxes', boxes)
+ 
+            b = BoxList(list(boxes), (density_map.shape[3], density_map.shape[2]))
+            b.fields['scores'] = torch.tensor(scores, dtype=b.box.dtype)
+            b = b.clip()
+            if self.norm_s:
+                b.fields['scores'] = torch.tensor(
+                    [(float(i) - min(scores)) / (max(scores) - min(scores)) for i in b.fields['scores']])
+ 
+            b = boxlist_nms(b, b.fields['scores'], self.i_thr)
+            bboxes.append(b)
+        return bboxes
 
     def generate_bbox(self, density_map, tlrb, gt_dmap=None):
         if gt_dmap is not None:
@@ -499,7 +593,8 @@ class COTR(nn.Module):
                 self.upscale(backbone_features), self.upscale(correlation_maps)
             )
 
-        generated_bboxes: BoxList = self.generate_bbox(outputR, tblr)[0]
+        # generated_bboxes = self.generate_bbox(outputR, tblr)[0]
+        generated_bboxes = self.sam_generate_bbox(x_img, outputR)[0]
         bboxes_p = generated_bboxes.box
 
         bboxes_pred = torch.cat(
@@ -688,6 +783,8 @@ class COTR(nn.Module):
 
 
 def build_model(args):
+    sam = sam_model_registry[args.sam_type](checkpoint=os.path.join(args.model_path, f'sam_{args.sam_type}.pth'))
+
     return COTR(
         image_size=args.image_size,
         num_encoder_layers=args.num_enc_layers,
@@ -719,4 +816,5 @@ def build_model(args):
         egv=args.egv,
         prompt_shot=args.prompt_shot,
         det_train=args.det_train,
+        sam = sam
     )

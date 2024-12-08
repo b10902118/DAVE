@@ -59,5 +59,6 @@ def get_argparser():
     parser.add_argument("--skip_cars", action="store_true")
     parser.add_argument("--skip_train", action="store_true")
     parser.add_argument("--skip_test", action="store_true")
+    parser.add_argument('--sam-type', default='vit_h', type=str)
 
     return parser
