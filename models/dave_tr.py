@@ -151,15 +151,21 @@ class COTR(nn.Module):
         n = torch.tensor(-1).to(feat_pairs.device)
         # combined_features reshape to [batchsize(32) * interest number(6), 6464]
         combined_features = combined_features.view(-1, combined_features.shape[-1])       
-
+        threshold = 0.8
+        margin = 0.2
         for f1, f2 in itertools.combinations(zip(combined_features), 2):
             # cosine similarity
             f1_tensor, f2_tensor= f1[0], f2[0]      
             # Calculate cosine similarity
             sim_value = F.cosine_similarity(f1_tensor, f2_tensor, dim=0, eps=1e-8)
-            loss += self.cos_loss(f1_tensor, f2_tensor, sim_value) 
+            if sim_value >= threshold: 
+                loss += (1 - sim_value)  
+            else:
+                loss += F.relu(margin - sim_value) 
         
             sim.append(sim_value.item())
+        num_pairs = len(sim)
+        loss = loss / num_pairs if num_pairs > 0 else loss
         return loss, sim
 
 

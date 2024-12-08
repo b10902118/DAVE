@@ -133,19 +133,20 @@ def train(args):
         val_loss = torch.tensor(0.0).to(device)
 
         model.train()
+        with tqdm(train_loader, desc="Training Progress", unit="batch") as pbar:
+            for img, bboxes, indices, density_map, img_ids in pbar:
+                img = img.to(device)
+                bboxes = bboxes.to(device)
+                optimizer.zero_grad()
+                loss, _ = model(img, bboxes)
 
-        for img, bboxes, indices, density_map,  img_ids in tqdm(train_loader, desc="Training Progress", unit="batch"):
-            img = img.to(device)
-            bboxes = bboxes.to(device)
-            optimizer.zero_grad()
-            loss, _ = model(img, bboxes)
-
-            train_loss += loss
-            loss.backward()
-            if args.max_grad_norm > 0:
-                nn.utils.clip_grad_norm_(model.parameters(), args.max_grad_norm)
-            optimizer.step()
-
+                train_loss += loss
+                loss.backward()
+                if args.max_grad_norm > 0:
+                    nn.utils.clip_grad_norm_(model.parameters(), args.max_grad_norm)
+                optimizer.step()
+                tqdm.write(f"Loss: {loss.item():.4f}")
+                pbar.set_postfix(loss=loss.item())
         print("VALIDATION")
         model.eval()
         with torch.no_grad():
