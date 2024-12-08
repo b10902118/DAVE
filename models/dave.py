@@ -4,6 +4,7 @@ import numpy as np
 import skimage
 import torch
 import os
+import cv2
 from PIL import Image
 from numpy import linalg as LA
 from scipy.sparse import csgraph
@@ -196,7 +197,7 @@ class COTR(nn.Module):
 
         return logits_per_image[0]
     
-    def sam_generate_bbox(self, imgs, density_map, gt_dmap=None):
+    def sam_generate_bbox(self, imgs, density_map, examplar_bboxes, gt_dmap=None):
         def prepare_image(image, transform, device):
             mean = torch.tensor([0.485, 0.456, 0.406]).view(3, 1, 1)
             std = torch.tensor([0.229, 0.224, 0.225]).view(3, 1, 1)
@@ -212,6 +213,11 @@ class COTR(nn.Module):
             density_map = gt_dmap
         local_max = [] 
         bboxes = []
+        examplar_bbox0 = []
+        examplar_bbox1 = []
+        examplar_bbox2 = []
+        
+        # getting the local maximums
         for i in range(density_map.shape[0]):
             dmap = np.array((density_map)[i][0].cpu())
  
@@ -219,8 +225,45 @@ class COTR(nn.Module):
             dmap[mask] = 0
             a = skimage.feature.peak_local_max(dmap, exclude_border=0) # (num_local_max, 2)
             local_max.append(torch.from_numpy(a).to(self.sam.device)) 
+
+            examplar_bbox0.append(examplar_bboxes[i][0].to(self.sam.device))
+            examplar_bbox1.append(examplar_bboxes[i][1].to(self.sam.device))
+            examplar_bbox2.append(examplar_bboxes[i][2].to(self.sam.device))
+            # exit()
  
+        batched_input = [
+            {
+                'image': prepare_image(img, self.sam_transform, self.sam.device),
+                'boxes': self.sam_transform.apply_boxes_torch(bbox, img.shape[-2:]),
+                'original_size': img.shape[-2:],
+            } 
+            for img, bbox in zip(imgs, examplar_bbox0)
+        ] 
  
+        batched_output_box0 = self.sam(batched_input, multimask_output=False) # 'masks': (B, 1, H, W), 'iou_predictions': (B, 1)
+
+        batched_input = [
+            {
+                'image': prepare_image(img, self.sam_transform, self.sam.device),
+                'boxes': self.sam_transform.apply_boxes_torch(bbox, img.shape[-2:]),
+                'original_size': img.shape[-2:],
+            } 
+            for img, bbox in zip(imgs, examplar_bbox1)
+        ] 
+ 
+        batched_output_box1 = self.sam(batched_input, multimask_output=False) # 'masks': (B, 1, H, W), 'iou_predictions': (B, 1)
+
+        batched_input = [
+            {
+                'image': prepare_image(img, self.sam_transform, self.sam.device),
+                'boxes': self.sam_transform.apply_boxes_torch(bbox, img.shape[-2:]),
+                'original_size': img.shape[-2:],
+            } 
+            for img, bbox in zip(imgs, examplar_bbox2)
+        ] 
+ 
+        batched_output_box2 = self.sam(batched_input, multimask_output=False) # 'masks': (B, 1, H, W), 'iou_predictions': (B, 1)
+
  
         batched_input = [
             {
@@ -234,9 +277,57 @@ class COTR(nn.Module):
  
         batched_output = self.sam(batched_input, multimask_output=True) # 'masks': (B, 1, H, W), 'iou_predictions': (B, 1)
  
- 
- 
-        for output in batched_output:
+        hu_moments0 = []
+        hu_moments1 = []
+        hu_moments2 = []
+        contourses0 = []
+        contourses1 = []
+        contourses2 = []
+        for i, output in enumerate(batched_output_box0):
+            mask0 = np.array(output['masks'][0][0].cpu(), np.uint8)
+            moment0 = cv2.HuMoments(cv2.moments(mask0)).flatten()
+            hu_moments0.append(moment0 * mask0.sum())
+            contours0, _ = cv2.findContours(mask0, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            contourses0.append(contours0)
+
+            mask1 = np.array(batched_output_box1[i]['masks'][0][0].cpu(), np.uint8)
+            moment1 = cv2.HuMoments(cv2.moments(mask1)).flatten()
+            hu_moments1.append(moment1 * mask1.sum())
+            contours1, _ = cv2.findContours(mask1, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            contourses1.append(contours1)
+
+            mask2 = np.array(batched_output_box2[i]['masks'][0][0].cpu(), np.uint8)
+            moment2 = cv2.HuMoments(cv2.moments(mask2)).flatten()
+            hu_moments2.append(moment2 * mask2.sum())
+            contours2, _ = cv2.findContours(mask2, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            contourses2.append(contours2)
+
+            # plt.figure(9)
+            # # plt.imshow(cur_img)
+            # show_mask(mask0, plt.gca())
+            # # show_points(np.array([a_transposed[j]]), np.array([1]), plt.gca())
+            # plt.title(f"Mask", fontsize=18)
+            # plt.axis('off')
+            # plt.show()
+
+            # plt.figure(9)
+            # # plt.imshow(cur_img)
+            # show_mask(mask1, plt.gca())
+            # # show_points(np.array([a_transposed[j]]), np.array([1]), plt.gca())
+            # plt.title(f"Mask", fontsize=18)
+            # plt.axis('off')
+            # plt.show()
+
+            # plt.figure(9)
+            # # plt.imshow(cur_img)
+            # show_mask(mask2, plt.gca())
+            # # show_points(np.array([a_transposed[j]]), np.array([1]), plt.gca())
+            # plt.title(f"Mask", fontsize=18)
+            # plt.axis('off')
+            # plt.show()
+
+        
+        for batch_num, output in enumerate(batched_output):
             all_masks = output['masks'].squeeze(1)
             all_scores = output['iou_predictions'].squeeze(1)
             best_masks = []
@@ -251,31 +342,37 @@ class COTR(nn.Module):
 
 
             for i, masks in enumerate(all_masks):
-                max_area = 0
-                largest_mask = masks[0]
+                min_diff = -1
+                best_mask = masks[0]
                 best_score = 0
                 
                 for j, mask in enumerate(masks):
-                    # if mask.sum() > max_area and mask.sum().cpu() < np.quantile(all_mask_sizes, 0.75) and mask.sum().cpu() > np.quantile(all_mask_sizes, 0.25):
-                    #     max_area = mask.sum()
-                    #     largest_mask = mask
-                    #     best_score = all_scores[i][j]
-                    # print(mask.sum())
-                    # print(mask.sum() <= np.quantile(all_masks_sums, 0.75))
+                    cur_mask = np.array(mask.cpu(), np.uint8)
+                    cur_moment = cv2.HuMoments(cv2.moments(cur_mask)).flatten()
+                    cur_contours, _ = cv2.findContours(cur_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                    dist = np.linalg.norm(hu_moments0[batch_num] - cur_mask.sum() * cur_moment) + np.linalg.norm(hu_moments2[batch_num] - cur_mask.sum() * cur_moment) + np.linalg.norm(hu_moments2[batch_num] - cur_mask.sum() * cur_moment)
+                    # dist = directed_hausdorff(contourses0[batch_num][0][:, 0, :], cur_contours[0][:, 0, :])[0]
+                    # dist += directed_hausdorff(contourses1[batch_num][0][:, 0, :], cur_contours[0][:, 0, :])[0]
+                    # dist += directed_hausdorff(contourses2[batch_num][0][:, 0, :], cur_contours[0][:, 0, :])[0]
+                    if min_diff == -1 or (dist < min_diff):
+                        min_diff = dist
+                        best_mask = mask
+                        best_score = -dist
+                    # print(dist)
+                    # # print(mask.sum())
+                    # # print(mask.sum() <= np.quantile(all_masks_sums, 0.75))
                     # plt.figure(9)
-                    # plt.imshow(cur_img)
-                    # show_mask(mask, plt.gca())
-                    # show_points(np.array([a_transposed[j]]), np.array([1]), plt.gca())
-                    # plt.title(f"Mask {k}", fontsize=18)
+                    # # plt.imshow(cur_img)
+                    # show_mask(cur_mask.astype(bool), plt.gca())
+                    # # show_points(np.array([a_transposed[j]]), np.array([1]), plt.gca())
+                    # plt.title(f"Mask {j}", fontsize=18)
                     # plt.axis('off')
                     # plt.show()
-
+                
                 # # largest_mask = remove_small_holes(largest_mask, area_threshold=1)
-                    best_masks.append(mask)
-                    best_scores.append(all_scores[i][j])
-                # best_masks.append(largest_mask)
-                # best_scores.append(best_score)
-
+                    # best_masks.append(mask)
+                best_masks.append(best_mask)
+                best_scores.append(best_score)
  
             for i, mask in enumerate(best_masks):
                 rows = torch.any(mask, dim=1).nonzero().squeeze()
@@ -303,7 +400,7 @@ class COTR(nn.Module):
                 im.save(f'mask{i}.png')
                 '''
  
-            print('boxes', boxes)
+            # print('boxes', boxes)
  
             b = BoxList(list(boxes), (density_map.shape[3], density_map.shape[2]))
             b.fields['scores'] = torch.tensor(best_scores, dtype=b.box.dtype)
@@ -313,6 +410,7 @@ class COTR(nn.Module):
                     [(float(i) - min(best_scores)) / (max(best_scores) - min(best_scores)) for i in b.fields['scores']])
  
             b = boxlist_nms(b, b.fields['scores'], self.i_thr)
+            b = boxlist_nms(b, b.fields['scores'], 0.2)
             bboxes.append(b)
         return bboxes
 
@@ -628,7 +726,7 @@ class COTR(nn.Module):
             )
 
         # generated_bboxes = self.generate_bbox(outputR, tblr)[0]
-        generated_bboxes = self.sam_generate_bbox(x_img, outputR)[0]
+        generated_bboxes = self.sam_generate_bbox(x_img, outputR, bboxes)[0]
         bboxes_p = generated_bboxes.box
 
         bboxes_pred = torch.cat(
