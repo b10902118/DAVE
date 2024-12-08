@@ -232,18 +232,52 @@ class COTR(nn.Module):
             for img, points in zip(imgs, local_max)
         ] 
  
-        batched_output = self.sam(batched_input, multimask_output=False) # 'masks': (B, 1, H, W), 'iou_predictions': (B, 1)
+        batched_output = self.sam(batched_input, multimask_output=True) # 'masks': (B, 1, H, W), 'iou_predictions': (B, 1)
  
  
  
         for output in batched_output:
-            masks = output['masks'].squeeze(1)
-            scores = output['iou_predictions'].squeeze(1).tolist()
+            all_masks = output['masks'].squeeze(1)
+            all_scores = output['iou_predictions'].squeeze(1)
+            best_masks = []
+            best_scores = []
             boxes = []
+
+            all_mask_sizes = []
+            for i, masks in enumerate(all_masks):
+                for j, mask in enumerate(masks):
+                    all_mask_sizes.append(mask.sum().cpu())
+            all_mask_sizes = np.array(all_mask_sizes)
+
+
+            for i, masks in enumerate(all_masks):
+                max_area = 0
+                largest_mask = masks[0]
+                best_score = 0
+                
+                for j, mask in enumerate(masks):
+                    # if mask.sum() > max_area and mask.sum().cpu() < np.quantile(all_mask_sizes, 0.75) and mask.sum().cpu() > np.quantile(all_mask_sizes, 0.25):
+                    #     max_area = mask.sum()
+                    #     largest_mask = mask
+                    #     best_score = all_scores[i][j]
+                    # print(mask.sum())
+                    # print(mask.sum() <= np.quantile(all_masks_sums, 0.75))
+                    # plt.figure(9)
+                    # plt.imshow(cur_img)
+                    # show_mask(mask, plt.gca())
+                    # show_points(np.array([a_transposed[j]]), np.array([1]), plt.gca())
+                    # plt.title(f"Mask {k}", fontsize=18)
+                    # plt.axis('off')
+                    # plt.show()
+
+                # # largest_mask = remove_small_holes(largest_mask, area_threshold=1)
+                    best_masks.append(mask)
+                    best_scores.append(all_scores[i][j])
+                # best_masks.append(largest_mask)
+                # best_scores.append(best_score)
+
  
- 
- 
-            for i, mask in enumerate(masks):
+            for i, mask in enumerate(best_masks):
                 rows = torch.any(mask, dim=1).nonzero().squeeze()
                 cols = torch.any(mask, dim=0).nonzero().squeeze()
                 if rows.numel() == 0 or cols.numel() == 0:
@@ -272,11 +306,11 @@ class COTR(nn.Module):
             print('boxes', boxes)
  
             b = BoxList(list(boxes), (density_map.shape[3], density_map.shape[2]))
-            b.fields['scores'] = torch.tensor(scores, dtype=b.box.dtype)
+            b.fields['scores'] = torch.tensor(best_scores, dtype=b.box.dtype)
             b = b.clip()
             if self.norm_s:
                 b.fields['scores'] = torch.tensor(
-                    [(float(i) - min(scores)) / (max(scores) - min(scores)) for i in b.fields['scores']])
+                    [(float(i) - min(best_scores)) / (max(best_scores) - min(best_scores)) for i in b.fields['scores']])
  
             b = boxlist_nms(b, b.fields['scores'], self.i_thr)
             bboxes.append(b)
