@@ -287,15 +287,9 @@ class COTR(nn.Module):
         return location
 
     def predict_density_map(self, backbone_features, bboxes):
-<<<<<<< HEAD
         # backbone feature :
         bs, _, bb_h, bb_w = backbone_features.size()
-        print("backbone_features.size()", backbone_features.size())  # 4, 3584, 64, 64
-=======
-        # backbone feature : 
-        batch_size, _, bb_h, bb_w = backbone_features.size()
-        # print("backbone_features.size()",backbone_features.size()) # 4, 3584, 64, 64
->>>>>>> d0cb8d6 (Remove distributed training of similarity model)
+        # print("backbone_features.size()", backbone_features.size())  # 4, 3584, 64, 64
 
         # # prepare the encoder input
         src = self.input_proj(backbone_features)
@@ -324,16 +318,17 @@ class COTR(nn.Module):
         # prepare the decoder input
         x = memory.permute(1, 2, 0).reshape(-1, self.emb_dim, bb_h, bb_w)
 
-        bboxes_ = torch.cat(
-            [
-                torch.arange(bs, requires_grad=False)
-                .to(bboxes.device)
-                .repeat_interleave(self.num_objects)
-                .reshape(-1, 1),
-                bboxes[:, : self.num_objects].flatten(0, 1),
-            ],
-            dim=1,
-        )
+        # not used
+        # bboxes_ = torch.cat(
+        #    [
+        #        torch.arange(bs, requires_grad=False)
+        #        .to(bboxes.device)
+        #        .repeat_interleave(self.num_objects)
+        #        .reshape(-1, 1),
+        #        bboxes[:, : self.num_objects].flatten(0, 1),
+        #    ],
+        #    dim=1,
+        # )
 
         # Extract the objectness
         if self.use_objectness and not self.zero_shot:

@@ -1,3 +1,5 @@
+*.pdf
+features/
 *~
 *.tar
 output_images/
