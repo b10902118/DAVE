@@ -4,3 +4,6 @@
 [submodule "loca"]
 	path = loca
 	url = https://github.com/djukicn/loca.git
+[submodule "MetaR-CNN"]
+	path = MetaR-CNN
+	url = https://github.com/yanxp/MetaR-CNN.git
