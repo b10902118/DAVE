@@ -346,7 +346,9 @@ class FSC147WithDensityMapSCALE2BOX(Dataset):
         tiling_p=0.5,
         zero_shot=False,
         skip_cars=False,
+        custom_indices=None,
     ):
+        self.custom_indices = custom_indices
         self.split = split
         self.data_path = data_path
         self.horizontal_flip_p = 0.5
@@ -397,6 +399,7 @@ class FSC147WithDensityMapSCALE2BOX(Dataset):
         self.scale_opt = True
 
     def __getitem__(self, idx: int) -> Tuple[Tensor, List[Tensor], Tensor]:
+        idx = self.custom_indices[idx] if self.custom_indices else idx
         img = Image.open(
             os.path.join(self.data_path, "images_384_VarV2", self.image_names[idx])
         )
@@ -520,6 +523,8 @@ class FSC147WithDensityMapSCALE2BOX(Dataset):
         return bboxes_xyxy, factors
 
     def __len__(self):
+        if self.custom_indices:
+            return len(self.custom_indices)
         return len(self.image_names)
 
     def map_img_name_to_ori_id(

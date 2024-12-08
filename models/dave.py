@@ -412,6 +412,8 @@ class COTR(nn.Module):
         x_repeated = torch.cat([x] * self.num_objects, dim=1).flatten(0, 1).unsqueeze(0)
 
         outputs_R = []
+
+        # weights.size(0) = 3 = num_decoder_layers
         for i in range(weights.size(0)):
             kernels = (
                 weights[i]

@@ -173,6 +173,8 @@ def evaluate(args):
     bigs = {"val": [], "test": []}
     masked = {"val": [], "test": []}
 
+    custom_indices = {"val": [i for i in range(117, 128)], "test": None}
+
     for split in ["val", "test"]:
         print("Evaluating", split)
         generate_annotations.anno_id = 1
@@ -187,6 +189,7 @@ def evaluate(args):
             num_objects=args.num_objects,
             tiling_p=args.tiling_p,
             zero_shot=args.zero_shot or args.orig_dmaps,
+            custom_indices=custom_indices[split],
         )
 
         test_loader = DataLoader(
