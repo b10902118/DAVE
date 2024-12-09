@@ -10,11 +10,7 @@ output_folder = "./visualizations"  # 存放圖片的資料夾
 os.makedirs(output_folder, exist_ok=True)
 
 # 獲取所有 npy 檔案
-<<<<<<< HEAD
 npy_files = [f for f in os.listdir(folder_path) if f.endswith(".npy")]
-=======
-npy_files = [f for f in os.listdir(folder_path) if f.endswith('.npy')]
->>>>>>> 294c8d9 (Add visualize code)
 
 # 遍歷檔案並儲存視覺化圖片
 for npy_file in npy_files:
@@ -24,7 +20,6 @@ for npy_file in npy_files:
     # 視覺化
     plt.figure(figsize=(6, 6))
     plt.title(f"Visualization of {npy_file}")
-<<<<<<< HEAD
     plt.imshow(data, cmap="viridis")  # 替換 cmap 調整配色
     plt.colorbar(label="Density")
     plt.axis("off")  # 隱藏坐標
@@ -32,15 +27,6 @@ for npy_file in npy_files:
     # 儲存圖片
     output_path = os.path.join(output_folder, f"{npy_file}.png")
     plt.savefig(output_path, dpi=300, bbox_inches="tight")  # 儲存高解析度圖片
-=======
-    plt.imshow(data, cmap='viridis')  # 替換 cmap 調整配色
-    plt.colorbar(label='Density')
-    plt.axis('off')  # 隱藏坐標
-
-    # 儲存圖片
-    output_path = os.path.join(output_folder, f"{npy_file}.png")
-    plt.savefig(output_path, dpi=300, bbox_inches='tight')  # 儲存高解析度圖片
->>>>>>> 294c8d9 (Add visualize code)
     plt.close()  # 關閉當前圖表以節省記憶體
 
     print(f"Saved {output_path}")

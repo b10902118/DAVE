@@ -20,6 +20,7 @@ from .boundingbox import BBOX_Network
 from .positional_encoding import PositionalEncodingsFixed
 from .regression_head import DensityMapRegressor
 from .transformer import TransformerEncoder, TransformerDecoder
+import matplotlib.pyplot as plt
 from copy import deepcopy
 import time
 
@@ -290,11 +291,10 @@ class COTR(nn.Module):
         return location
 
     def predict_density_map(self, backbone_features, bboxes):
-        # backbone feature :
+        # backbone feature : 4, 3584, 64, 64
         bs, _, bb_h, bb_w = backbone_features.size()
-        # print("backbone_features.size()", backbone_features.size())  # 4, 3584, 64, 64
 
-        # # prepare the encoder input
+        # prepare the encoder input
         src = self.input_proj(backbone_features)
         bs, c, h, w = src.size()
         pos_emb = self.pos_emb(bs, h, w, src.device).flatten(2).permute(2, 0, 1)
@@ -312,9 +312,7 @@ class COTR(nn.Module):
                 end_time = time.time()
                 print(f"\t- encoding {end_time - start_time:.0f} seconds", flush=True)
             else:
-                memory = self.encoder(
-                    src, pos_emb, src_key_padding_mask=None, src_mask=None
-                )
+                memory = self.encoder(src, pos_emb, src_key_padding_mask=None, src_mask=None)
         else:
             memory = src
 
@@ -322,16 +320,11 @@ class COTR(nn.Module):
         x = memory.permute(1, 2, 0).reshape(-1, self.emb_dim, bb_h, bb_w)
 
         # not used
-        # bboxes_ = torch.cat(
-        #    [
-        #        torch.arange(bs, requires_grad=False)
-        #        .to(bboxes.device)
-        #        .repeat_interleave(self.num_objects)
-        #        .reshape(-1, 1),
-        #        bboxes[:, : self.num_objects].flatten(0, 1),
-        #    ],
-        #    dim=1,
-        # )
+        # bboxes_ = torch.cat([ torch.arange(bs, requires_grad=False)
+        #                       .to(bboxes.device)
+        #                       .repeat_interleave(self.num_objects)
+        #                       .reshape(-1, 1),
+        #                       bboxes[:, : self.num_objects].flatten(0, 1),], dim=1)
 
         # Extract the objectness of Visual Examplars
         if self.use_objectness and not self.zero_shot:
@@ -345,9 +338,7 @@ class COTR(nn.Module):
                 .transpose(0, 1)
             )
         elif self.zero_shot:
-            objectness = (
-                self.objectness.expand(bs, -1, -1, -1).flatten(1, 2).transpose(0, 1)
-            )
+            objectness = (self.objectness.expand(bs, -1, -1, -1).flatten(1, 2).transpose(0, 1))
         else:
             objectness = None
 
@@ -391,11 +382,11 @@ class COTR(nn.Module):
             query_pos_emb = None
 
         if self.num_decoder_layers > 0:
-            # print("objectness.shape",objectness.shape)          # 27, 4, 256 (every feature embedding)
-            # print("appearance.shape",appearance.shape)          # 27, 4, 256 (every feature embedding)
-            # print("memory.shape",memory.shape)                  # 4096, 4, 256 (every feature embedding)
-            # print("pos_emb.shape",pos_emb.shape)                # 4096, 4, 256 (every feature embedding)
-            # print("query_pos_emb.shape",query_pos_emb.shape)    # 27, 4, 256 (every feature embedding)
+            # objectness : [27, 4, 256 (every feature embedding)]
+            # appearance : [27, 4, 256 (every feature embedding)]
+            # memory : [4096, 4, 256 (every feature embedding)]
+            # pos_emb : [4096, 4, 256 (every feature embedding)]
+            # query_pos_emb.shape : [27, 4, 256 (every feature embedding)]
             weights = self.decoder(
                 objectness if objectness is not None else appearance,
                 appearance,
@@ -434,23 +425,18 @@ class COTR(nn.Module):
                     groups=kernels.size(0),
                 ).view(bs, self.num_objects, self.emb_dim, bb_h, bb_w)
                 softmaxed_correlation_maps = correlation_maps.softmax(dim=1)
-                correlation_maps = torch.mul(
-                    softmaxed_correlation_maps, correlation_maps
-                ).sum(dim=1)
+                correlation_maps = torch.mul(softmaxed_correlation_maps, correlation_maps).sum(dim=1)
             else:
                 correlation_maps = (
-                    F.conv2d(
-                        torch.cat([x for _ in range(self.num_objects)], dim=1)
-                        .flatten(0, 1)
-                        .unsqueeze(0),
-                        kernels,
-                        bias=None,
-                        padding=self.kernel_dim // 2,
-                        groups=kernels.size(0),
-                    )
+                    F.conv2d(   torch.cat([x for _ in range(self.num_objects)], dim=1)
+                                .flatten(0, 1)
+                                .unsqueeze(0),
+                                kernels,
+                                bias=None,
+                                padding=self.kernel_dim // 2,
+                                groups=kernels.size(0),)
                     .view(bs, self.num_objects, self.emb_dim, bb_h, bb_w)
-                    .max(dim=1)[0]
-                )
+                    .max(dim=1)[0])
 
             # send through regression head
             if i == weights.size(0) - 1:  # last iteration
@@ -478,9 +464,8 @@ class COTR(nn.Module):
         )
 
         if self.det_train:
-            tblr = self.box_predictor(  # Top, Bottom, Left, and Right
-                self.upscale(backbone_features), self.upscale(correlation_maps)
-            )
+            # Top, Bottom, Left, and Right
+            tblr = self.box_predictor(self.upscale(backbone_features), self.upscale(correlation_maps))
             location = self.compute_location(tblr)
             return outputs_R[-1], outputs_R[:-1], tblr, location
 
@@ -533,7 +518,6 @@ class COTR(nn.Module):
             )
             examplar_bboxes_ = bboxes_
             bboxes_ = torch.cat([bboxes_, bboxes_pred])
-            print("bboxes_.size", bboxes.shape)
         else:
             bboxes_ = bboxes_pred
 
@@ -569,10 +553,36 @@ class COTR(nn.Module):
             .reshape(bs, bboxes_.shape[0], -1)
             .permute(1, 0, 2)
         )
+        '''
+        print("examplar_vecors", examplar_vecors.shape)
+        examplar_pairs = (
+            self.feat_comp(examplar_vecors.reshape(1 * examplar_bboxes_.shape[0], 3584, 3, 3))
+            .reshape(bs, examplar_bboxes_.shape[0], -1)
+            .permute(1, 0, 2)
+        )
+        '''
 
-        bbox_embedding = self.bbox_network(bboxes_.unsqueeze(0))
-        bbox_embedding = bbox_embedding.permute(1, 0, 2)
+        # visualize
+        plt.figure(figsize=(6, 6))
+        plt.imshow(outputR[0][0].cpu(), cmap="viridis")  # 替換 cmap 調整配色
+        plt.colorbar(label="Density")
+        plt.savefig("visualize.jpg", dpi=300, bbox_inches="tight")
+        print("bboxes_",bboxes_.shape)
+        print("outputR",outputR[0][0].shape)
+        density_list = []
+        for bbox in bboxes_:
+            x_min, y_min, x_max, y_max = bbox[1:]
+            x_min, y_min, x_max, y_max = int(x_min), int(y_min), int(x_max), int(y_max)
+            cropped_density = outputR[0, 0, y_min:y_max, x_min:x_max]
+            object_count = round(cropped_density.sum().item(), 1)
+            density_list.append(object_count)
+        print("density_list",density_list)
+        # Predicted by Model
+        bbox_embedding = self.bbox_network(bboxes_.unsqueeze(0)).permute(1, 0, 2)
         combined_features = torch.cat((feat_pairs, bbox_embedding), dim=-1)
+        # Given by User
+        # exemplar_bbox_embedding = self.bbox_network(examplar_bboxes_.unsqueeze(0)).permute(1, 0, 2)
+        # exemplar_combined_features = torch.cat((examplar_pairs, exemplar_bbox_embedding), dim=-1)
         # Use combined_features as feat_pairs
         # [bounding box, batch size, 6464]
         feat_pairs = combined_features
@@ -589,10 +599,14 @@ class COTR(nn.Module):
         #     dst_mtx[f1[1]][f1[1]] = 1
         #     dst_mtx[f2[1]][f1[1]] = s
 
+        # feat_pairs : [number of bounding box, batch size, feature size]
         feat_pairs = feat_pairs[:, 0]
-        dst_mtx = (
-            self.cosine_sim(feat_pairs[None, :], feat_pairs[:, None]).cpu().numpy()
-        )
+        # feat_pairs : [number of bounding box, feature size]
+        # feat_pairs[None, :] : [1 ,number of bounding box, feature size]
+        # feat_pairs[:, None] : [number of bounding box, 1, feature size]
+        dst_mtx = ( self.cosine_sim(feat_pairs[None, :], feat_pairs[:, None]).cpu().numpy())
+        print("dst_mtx", dst_mtx.shape)
+
         dst_mtx[dst_mtx < 0] = 0
         print("Verification Stage")
         if self.zero_shot and self.prompt_shot:
@@ -673,18 +687,12 @@ class COTR(nn.Module):
                 labels = spectral.fit_predict(
                     dst_mtx
                 )  # return each box's cluster label
-                correct_class_labels = list(  # first num_objects are the examples
-                    np.unique(np.array(labels[: self.num_objects]))
-                )
+                # first num_objects are the examples
+                correct_class_labels = list(np.unique(np.array(labels[: self.num_objects])))
 
                 for i, box in enumerate(bboxes_p):
                     # box = bboxes_p[i]
-                    if (
-                        box_iou(
-                            box.unsqueeze(0), bboxes_[: self.num_objects][:, 1:].cpu()
-                        )
-                        > 0.6
-                    ).any():
+                    if (box_iou(box.unsqueeze(0), bboxes_[: self.num_objects][:, 1:].cpu())> 0.6).any():
                         correct_class_labels.append(labels[i + self.num_objects])
 
                 mask = np.in1d(labels, correct_class_labels).reshape(labels.shape)
@@ -692,6 +700,9 @@ class COTR(nn.Module):
                 exemplar_bboxes = generated_bboxes[mask[self.num_objects :]]
 
             outputR_no_mask = outputR.clone()
+            # outputR : [batch size, lastone[]]
+            print("outputR", outputR.shape) #
+            print("exemplar_bboxes", exemplar_bboxes.box.shape)
             if mask is not None and np.any(mask == False):
                 outputR[0][0] = mask_density(outputR[0], exemplar_bboxes)
 

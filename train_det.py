@@ -110,13 +110,16 @@ def train(args):
         else:
             non_backbone_params[n] = p
 
-    optimizer = torch.optim.AdamW(
-        [
-            {"params": fcos_params.values(), "lr": args.lr},
-        ],
-        lr=args.lr,
-        weight_decay=args.weight_decay,
-    )
+    # Freeze all parameter
+    for name, param in model.named_parameters():
+    param.requires_grad = False
+    # Only train the box_predictor
+    for name, param in model.named_parameters():
+        if "box_predictor" in name:
+            param.requires_grad = True
+
+    optimizer = torch.optim.AdamW([{"params": fcos_params.values(), "lr": args.lr},],
+                                    lr=args.lr, weight_decay=args.weight_decay,)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, args.lr_drop, gamma=0.25)
     if args.resume_training:
         checkpoint = torch.load(os.path.join(args.model_path, f"{args.model_name}.pth"))
@@ -132,19 +135,15 @@ def train(args):
 
     criterion = Criterion(args)
     aux_criterion = Criterion(args, aux=True)
-    det_criterion = Detection_criterion(
-        [
-            [-1, args.fcos_pred_size],
-            [64, 128],
-            [128, 256],
-            [256, 512],
-            [512, 100000000],
-        ],  # config.sizes,
-        "giou",  # config.iou_loss_type,
-        True,  # config.center_sample,
-        [1],  # config.fpn_strides,
-        5,  # config.pos_radius,
-    )
+    det_criterion = Detection_criterion([[-1, args.fcos_pred_size],
+                                        [64, 128],
+                                        [128, 256],
+                                        [256, 512],
+                                        [512, 100000000],], # config.sizes,
+                                        "giou",             # config.iou_loss_type,
+                                        True,               # config.center_sample,
+                                        [1],                # config.fpn_strides,
+                                        5,)                  # config.pos_radius,
 
     train = DATASETS[args.dataset](
         args.data_path,
