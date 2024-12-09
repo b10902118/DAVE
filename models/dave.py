@@ -114,7 +114,6 @@ class COTR(nn.Module):
                 activation,
                 norm,
             )
-            self.encoder_cpu = None
 
         if num_decoder_layers > 0:
             self.decoder = TransformerDecoder(
@@ -410,9 +409,11 @@ class COTR(nn.Module):
         # prepare regression decoder input
         x = memory.permute(1, 2, 0).reshape(-1, self.emb_dim, bb_h, bb_w)
         x_repeated = torch.cat([x] * self.num_objects, dim=1).flatten(0, 1).unsqueeze(0)
+        # print(f"{x_repeated.shape=}")  # 1, 768, 64, 64 (768=256*3)
 
         outputs_R = []
 
+        # print(f"{weights.size()=}") # 3, 27, 1, 256
         # weights.size(0) = 3 = num_decoder_layers
         for i in range(weights.size(0)):
             kernels = (
@@ -422,18 +423,20 @@ class COTR(nn.Module):
                 .permute(0, 1, 4, 2, 3)
                 .flatten(0, 2)[:, None, ...]
             )
+            # print(f"{kernels.shape=}") # 768, 1 ,3, 3
 
             conv2d_params = {
                 "input": x_repeated,
                 "weight": kernels,
                 "bias": None,
                 "padding": self.kernel_dim // 2,
-                "groups": kernels.size(0),
+                "groups": kernels.size(0),  # depthwise convolution
             }
 
             correlation_maps = F.conv2d(**conv2d_params).view(
                 bs, self.num_objects, self.emb_dim, bb_h, bb_w
             )
+            # print(f"{correlation_maps.shape=}") # 1, 3, 256, 64, 64
 
             if self.num_objects > 1 and not self.zero_shot:
                 softmaxed_correlation_maps = correlation_maps.softmax(dim=1)
@@ -528,8 +531,8 @@ class COTR(nn.Module):
             roi_align(
                 backbone_features,
                 boxes=bboxes_,
-                output_size=self.kernel_dim,
-                spatial_scale=1.0 / self.reduction,
+                output_size=self.kernel_dim,  # fixed 3
+                spatial_scale=1.0 / self.reduction,  # image & feature size ratio
                 aligned=True,
             )
             .permute(0, 2, 3, 1)

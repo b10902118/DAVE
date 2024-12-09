@@ -30,7 +30,8 @@ class Backbone(nn.Module):
         self.backbone = resnet
         self.reduction = reduction
         # https://github.com/facebookresearch/swav : Facebook release.
-        if name == "resnet50" and swav:
+        if name == "resnet50" and swav:  # fixed pretrained weights
+            # print("Loading pretrained weights from SwAV")
             checkpoint = torch.hub.load_state_dict_from_url(
                 "https://dl.fbaipublicfiles.com/deepcluster/swav_800ep_pretrain.pth.tar",
                 map_location="cpu",
@@ -68,5 +69,8 @@ class Backbone(nn.Module):
             ],
             dim=1,
         )
+        # size = torch.Size([1, 3584, 64, 64])
+        # Zero out the last 1/4 of the tensor
+        # x[:, 500:] = 0
 
         return x
