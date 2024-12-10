@@ -7,7 +7,7 @@ export CUDA_VISIBLE_DEVICES=3
 # 4 -> 2
 # 3 -> 1
 # 2 -> 0
-CUDA_VISIBLE_DEVICES=5 python ./train_similarity.py \
+CUDA_VISIBLE_DEVICES=3 python ./train_similarity.py \
 --model_name base_3_shot \
 --det_model_name verification \
 --data_path /project/g/r13922043/dave_dataset/FSC147 \

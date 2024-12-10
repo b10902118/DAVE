@@ -123,7 +123,7 @@ def train(args):
         num_workers=args.num_workers,
     )
     # Change Path to save the log
-    sim_logdir = "./sim_logdir_2"
+    sim_logdir = "./sim_logdir_3"
     os.makedirs(sim_logdir, exist_ok=True)
     print("NUM STEPS", len(train_loader) * args.epochs)
 
@@ -171,7 +171,7 @@ def train(args):
                 'best_val_ae': val_loss.item() / len(val)
         }
         # Change Path to save the checkpoint
-        path_dir = os.path.join(args.model_path, "similarity_2")
+        path_dir = os.path.join(args.model_path, "similarity_3")
         os.makedirs(path_dir, exist_ok=True)
         path_name = os.path.join(path_dir, f'{args.det_model_name}_{epoch}.pth')
         torch.save( checkpoint, path_name)

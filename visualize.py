@@ -26,7 +26,7 @@ for npy_file in npy_files:
 
     # 儲存圖片
     output_path = os.path.join(output_folder, f"{npy_file}.png")
-    plt.savefig(output_path, dpi=300, bbox_inches="tight")  # 儲存高解析度圖片
+    plt.savefig(output_path, dpi=300, bbox_inches="tight")
     plt.close()  # 關閉當前圖表以節省記憶體
 
     print(f"Saved {output_path}")

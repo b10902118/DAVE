@@ -14,12 +14,6 @@ class Attention_Convolution(nn.Module):
                               stride        =   2,
                               bias=bias)
 
-        self.residual = nn.Sequential(nn.ConvTranspose2d(   in_channels,
-                                                            out_channels,
-                                                            kernel_size=2,
-                                                            stride=2,
-                                                            bias=bias),
-                                      nn.BatchNorm2d(out_channels))
     def forward(self, ori_x, att_A):
         # attention_map : [4, 1, 512, 512]
         # ori_x : [4, 256, 512, 512]
@@ -30,11 +24,7 @@ class Attention_Convolution(nn.Module):
         x = x.view(n, 4, kc//4, t, v)
         x = torch.einsum('nkctv,nkvw->nctw', (x, att_A)) 
         # [4, 256, 512, 512]
-        res = self.residual(ori_x)
-        # [4, 256, 512, 512]
-        # x : [4, 256, (128 -> 256 -> 512), (128 -> 256 -> 512)]
-        # res : [4, 256, (128 -> 256 -> 512), (128 -> 256 -> 512)]
-        x = x + res
+        # x : [4, 256, (128 -> 256 -> 512), (128 -> 256 -> 512)]      
 
         # [4, 256, 512, 512]
         return x.contiguous()
@@ -59,10 +49,9 @@ class FeatureFusionModule(torch.nn.Module):
         # backbone's CNN
         self.convblock  = ConvBlock( in_channels=self.in_channels, out_channels=num_classes, stride=1)
         self.conv1      = Attention_Convolution(num_classes, num_classes)
-        self.relu       = nn.ReLU()
         self.conv2      = Attention_Convolution(num_classes, num_classes)
         self.conv3      = Attention_Convolution(num_classes, num_classes)
-        self.sigmoid    = nn.Sigmoid()
+        self.relu       = nn.ReLU()
         self.avgpool    = nn.AdaptiveAvgPool2d(output_size=(1, None))
         self.maxpool    = nn.AdaptiveMaxPool2d(output_size=(1, 1))
         self.upscale    = nn.Upsample(scale_factor=(2, 2))
@@ -76,20 +65,19 @@ class FeatureFusionModule(torch.nn.Module):
         assert self.in_channels == x.size( 1 ), "in_channels of ConvBlock should be {}".format(x.size(1))
         # Covolution Neural Network 1
         # x : [4, 512, 64, 64]
-        feature = self.convblock(x)    # x : [4, 512, 512, 512] -> feature : [4, 256, 512, 512]
-        feature_upscale = self.upscale8(feature)
+        feature = self.convblock(x)     # x : [4, 512, 512, 512] -> feature : [4, 256, 512, 512]
         attention_map = self.upscale(attention_map)
         # Covolution Neural Network 2
         x = self.conv1(feature,attention_map)
-        x = self.relu(x)               # x : [4, 256, 512, 512]  
+        x = self.relu(x)                # x : [4, 256, 512, 512]  
         attention_map = self.upscale(attention_map)
         # Covolution Neural Network
-        x = self.conv2(x,attention_map)# x : [4, 256, 512, 512]  
+        x = self.conv2(x,attention_map) # x : [4, 256, 512, 512]
         x = self.relu(x) 
         attention_map = self.upscale(attention_map)
         # Covolution Neural Network
         x = self.conv3(x,attention_map)
-        x = self.sigmoid(x)         # 
+        x = self.relu(x)
         return x
 
 class Scale(nn.Module):

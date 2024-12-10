@@ -2,7 +2,7 @@ export NCCL_DEBUG=INFO
 export NCCL_IB_DISABLE=1
 export NCCL_NET_GDR_DISABLE=1
 export NCCL_P2P_DISABLE=1
-export CUDA_VISIBLE_DEVICES=0
+export CUDA_VISIBLE_DEVICES=3
 
 python3 ./main.py \
 --skip_train \

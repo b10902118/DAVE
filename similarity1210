@@ -1,0 +1,5582 @@
+Namespace(aux_weight=0.3, backbone='resnet50', backbone_lr=0, batch_size=32, count_loss_weight=0.0, d_s=1.0, d_t=3, data_path='/project/g/r13922043/dave_dataset/FSC147', dataset='fsc147', det_model_name='verification', det_train=False, detection_loss_weight=0.01, dropout=0.1, egv=0.132, emb_dim=256, epochs=50, eval_multicat=False, fcos_pred_size=512, i_thr=0.1, image_size=512, kernel_dim=3, lr=1e-05, lr_drop=220, m_s=0.0, max_grad_norm=0.1, min_count_loss_weight=0.0, model_name='base_3_shot', model_path='/project/g/r13922043/dave_model/', norm_s=False, normalized_l2=True, num_dec_layers=3, num_enc_layers=3, num_heads=8, num_objects=3, num_workers=8, orig_dmaps=False, pre_norm=True, prompt_shot=False, reduction=8, resume_training=False, s_t=0.008, skip_cars=False, skip_test=False, skip_train=False, swav_backbone=True, task='fscd147', tiling_p=0.4, unseen=False, use_appearance=True, use_objectness=True, use_query_pos_emb=True, weight_decay=0.01, zero_shot=False)
+3659
+1286
+loading annotations into memory...
+Done (t=0.39s)
+creating index...
+index created!
+NUM STEPS 5750
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 258.5071
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 261.9712
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 245.4173
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 258.4298
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 261.4180
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 259.7910
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 254.2367
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 264.0800
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 262.0741
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 246.0572
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 256.4377
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 236.8154
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 258.5808
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 242.3731
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 258.6205
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 243.9501
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 255.5189
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 254.7125
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 236.9672
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 258.6779
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 253.8464
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 236.7526
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 240.5838
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 251.6044
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 251.7265
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 252.2531
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 232.2000
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 247.9664
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 248.9070
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 250.8447
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 232.3887
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 251.6084
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 244.8975
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 241.6222
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 245.8575
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 233.4941
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 253.8363
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 242.3853
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 243.8994
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 256.8642
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 247.2424
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 238.8525
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 241.0970
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 240.3743
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 234.5103
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 247.5053
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 250.8617
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 233.7002
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 233.8204
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 250.6488
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 253.1772
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 250.2294
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 241.6921
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 249.6801
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 237.5248
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 246.7557
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 236.9835
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 236.5611
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 232.3369
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 251.4362
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 237.2967
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 262.0432
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 232.2502
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 227.5329
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 239.0916
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 235.2236
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 237.2948
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 237.1519
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 239.2726
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 240.7241
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 238.8594
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 235.4658
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 227.9416
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 245.2426
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 243.8859
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 224.1482
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 231.4196
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 240.8881
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 240.8900
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 216.7324
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 231.7391
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 218.6423
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 240.2724
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 243.4574
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 235.4646
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 240.8031
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 221.4668
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 219.4309
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 240.9670
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 220.9199
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 253.4916
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 226.2971
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 221.9733
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 242.3587
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 226.5662
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 238.3274
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 250.3536
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 244.0609
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 232.5874
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 217.1964
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 229.5924
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 234.5099
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 238.2776
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 243.1020
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 244.5420
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 241.7856
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 234.3361
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 221.2088
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 208.0039
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 221.7527
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 237.6008
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 232.6978
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 224.6777
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 219.9738
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 71.2806
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 1
+Train loss 7.528351539013392
+Val loss 7.121557731094479
+Best Epoch :  1
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_1.pth
+*****************************************
+Epoch 1 information saved to ./sim_logdir_3/sim_1.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 212.3233
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 241.4120
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 241.9781
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 229.7462
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 247.0608
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 235.5966
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 236.4545
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 225.9469
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 239.6132
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 237.8700
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 232.5102
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 237.7425
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 226.5581
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 235.9615
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 232.5797
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 220.1046
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 237.9125
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 243.8279
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 226.6068
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 247.4545
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 230.6822
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 240.2875
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 221.6008
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 226.6306
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 235.0307
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 227.7915
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 228.0191
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 232.6193
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 235.4987
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 218.3673
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 215.4803
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 215.8977
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 231.3164
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 209.1078
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 231.4019
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 234.6052
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 218.5434
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 233.8054
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 207.1610
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 222.1013
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 231.1680
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 225.1662
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 223.8926
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 221.9688
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 219.3048
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 213.3131
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 226.2853
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 221.3377
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 226.6754
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 216.0016
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 237.0799
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.3200
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 225.1760
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 220.0648
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 223.3040
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 215.3916
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 229.4278
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 226.3828
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 216.6275
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 214.8815
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 212.2047
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 236.4112
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 207.9900
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 241.6878
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 228.2845
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 216.5490
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 219.3191
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 221.2966
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 206.7349
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 218.3957
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 224.1962
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 219.0354
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 230.1311
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 206.3880
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 224.2610
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 225.1244
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 210.4446
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 195.5170
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 239.3876
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 226.8490
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 222.4199
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 204.8132
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 193.9300
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 201.6990
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 194.9595
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 231.9857
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 213.7483
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 178.7072
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 227.0658
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 216.5033
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 230.7853
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 207.2747
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 213.8499
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 238.0981
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 227.5928
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 230.5940
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 207.8521
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 207.9104
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 214.2119
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 217.3947
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 229.2842
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 200.7099
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.7599
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 231.1242
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 205.1351
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 195.5634
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 209.2090
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 216.2855
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 216.0431
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 220.3181
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 214.8288
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 217.6582
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.5466
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 223.7465
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 70.5528
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 2
+Train loss 6.938876101735447
+Val loss 6.567660745528771
+Best Epoch :  2
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_2.pth
+*****************************************
+Epoch 2 information saved to ./sim_logdir_3/sim_2.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 219.7453
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 253.8607
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 226.1441
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 232.3953
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.1642
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 215.5555
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 214.4597
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.6793
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 208.1423
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 197.1209
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 221.4889
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 199.5234
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 178.0658
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 211.0251
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 193.2449
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 220.7473
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 216.7185
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 186.8141
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 199.3975
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 187.7212
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 213.1595
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 216.6660
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 192.0889
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 196.5822
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 219.6603
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 189.1225
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 216.0413
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 207.7531
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 210.0870
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 210.8521
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 192.0662
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 218.1053
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 231.4917
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 199.4935
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 211.0732
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 213.4736
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 194.3436
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 208.2946
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 239.9355
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.6246
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 201.0999
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 221.4979
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.8701
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 233.3215
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 211.1977
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 201.1245
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 220.9704
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 188.3203
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 221.0112
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 220.9324
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 211.0762
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 199.0190
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.6053
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 213.7916
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 206.7076
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 204.2862
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 230.0781
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 206.7309
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 224.8941
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 209.7373
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 227.3571
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 192.3342
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 220.2411
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 213.4624
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 187.6548
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.0796
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 198.3022
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 213.5270
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 196.3347
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 212.1207
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 212.3361
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 196.4093
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 194.4851
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 220.6682
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 225.1763
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 208.2568
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 192.6190
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 187.8016
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 217.7938
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 213.1230
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.6961
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.4512
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 210.0762
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.7217
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 199.7216
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 207.6883
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 193.6878
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 197.0533
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.8589
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 192.9596
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 199.1991
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.0308
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 208.6304
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 225.3417
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 199.5477
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 204.8667
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 208.6268
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 191.4227
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 230.5471
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 215.2183
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 222.9633
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 198.4283
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 204.5217
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 208.0649
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 189.9865
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 193.1617
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 185.4181
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 207.3676
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 213.6181
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 191.0622
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 218.7013
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 204.3481
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 222.3196
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 222.7235
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 77.5849
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 3
+Train loss 6.487262785255535
+Val loss 6.276939000534603
+Best Epoch :  3
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_3.pth
+*****************************************
+Epoch 3 information saved to ./sim_logdir_3/sim_3.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.7499
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 205.1490
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 211.1884
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 197.0176
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 220.7591
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 196.3825
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 207.0300
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 212.1536
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 187.9994
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 221.6799
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 206.0728
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.2857
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 191.7449
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 222.0914
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 189.7727
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 188.6128
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 199.6678
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.1228
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.3482
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 199.4975
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 213.4846
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 208.5079
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 207.0616
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 200.1460
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.2782
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 215.5301
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 210.5819
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.3891
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 197.2415
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.4667
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 196.8341
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 217.2133
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 191.8555
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 196.1257
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 201.3907
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.2733
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 221.5485
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 185.6779
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.1090
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 201.8882
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 195.4513
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 199.4520
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 205.1560
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 216.7045
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 189.7499
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.0651
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 223.1145
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 197.8602
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 195.5664
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 192.3188
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.3376
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.5876
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.4855
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 187.7239
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 194.0279
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 191.4899
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.2260
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 193.0999
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 186.5963
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 195.0210
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.7288
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.7821
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.5231
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 186.5867
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.2941
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 185.2883
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 196.6086
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.0107
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 200.4165
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 198.3888
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 199.0819
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 222.9312
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.9715
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.9436
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.2496
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.1054
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.6998
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.5603
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 188.3241
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 191.7991
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 217.4293
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 182.2292
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 200.7918
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.4156
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 218.7173
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 200.8591
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 225.6227
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.4686
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 213.2707
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.3645
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 197.8435
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.1447
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 197.0816
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 199.0429
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 197.0327
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 217.6791
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.1808
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.9843
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 190.4853
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.1760
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.3938
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.0115
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.5701
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 188.3971
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.1734
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.2045
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.6110
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.6072
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.4748
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.3876
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 206.9323
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.1160
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.3959
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 197.4893
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 53.1996
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 4
+Train loss 6.036908671255808
+Val loss 6.083379149251555
+Best Epoch :  4
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_4.pth
+*****************************************
+Epoch 4 information saved to ./sim_logdir_3/sim_4.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 205.2424
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.9052
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.5527
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 194.3851
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.7645
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 186.3036
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 211.1406
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 190.9335
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.0453
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 197.8919
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 182.1235
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.6792
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 201.4247
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.4869
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 187.2196
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.9999
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 201.6193
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 200.3873
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.3065
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.0789
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 197.7609
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 190.4804
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 186.2504
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 207.3641
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 216.4665
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.4790
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.9359
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.1514
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 178.2762
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.0057
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 208.5667
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 189.1842
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 217.5725
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 201.9940
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.4189
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.0787
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 199.5684
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.8213
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.3805
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.3588
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.7388
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 191.3582
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 197.4637
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.8002
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.2760
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 187.9003
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 187.7138
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.2167
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.1940
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.8441
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.0200
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.8308
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 188.8210
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.7299
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 196.4838
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.4897
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 183.3125
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 186.4409
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 191.2762
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 205.9885
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.9694
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 207.0400
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.9759
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.6084
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.6180
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 185.1981
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 196.0060
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 201.1346
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 192.1430
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 185.5148
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 186.3372
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.4618
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 217.3939
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.4737
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 193.3709
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.8490
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.7950
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 209.6456
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.4689
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 194.0890
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.7539
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.5200
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.1782
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.3052
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 210.3674
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 205.2475
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.3005
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 196.2713
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.1030
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 193.9208
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 189.1738
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.2612
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.7954
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.3897
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.2666
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.5359
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.6445
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.0339
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.1261
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.8479
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.9563
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 194.0023
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.6130
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.8800
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.5997
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 205.1766
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.9191
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.3853
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 182.8617
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.5125
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 214.4080
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 194.5053
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.9821
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.2085
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 79.5901
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 5
+Train loss 5.796458112701558
+Val loss 5.626284491033243
+Best Epoch :  5
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_5.pth
+*****************************************
+Epoch 5 information saved to ./sim_logdir_3/sim_5.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.5558
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 189.0810
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.4477
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.9607
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.5885
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.9550
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.9416
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.9234
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.3163
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 208.0341
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 212.2645
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 183.7869
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.9508
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.8497
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.2631
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 199.7867
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.9555
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 183.7630
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.6674
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.2836
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.9371
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 188.3084
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 209.7864
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 192.3671
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 201.5293
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 178.6614
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 178.8116
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 168.1768
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 195.6355
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.3183
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.9151
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 190.0591
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 199.5874
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.7782
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 200.8898
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.2594
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.5086
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 190.9043
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.2415
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 189.8398
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.6608
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.5477
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 188.8205
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.2298
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.5015
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.5406
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.8864
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.8843
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.2589
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 183.6181
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 178.3285
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 183.1409
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.4763
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.7529
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.8748
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.0586
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.3925
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.0172
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.0438
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 183.6362
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 192.9992
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.2715
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 201.5688
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.5252
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.9683
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 185.8053
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.4178
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.1748
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 207.8392
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.5311
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.3114
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.7957
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 178.4783
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 168.2838
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.0849
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.3456
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 168.4481
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.3739
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.3443
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.4539
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 199.3090
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.5105
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.5774
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.8070
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 183.6169
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 168.5839
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 182.6057
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 208.9054
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.1630
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.9971
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.6290
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.2331
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.0046
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.9471
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 190.4066
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.9017
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 178.7833
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.0718
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.9597
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.8466
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 196.2257
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.2553
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.7969
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.0622
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 192.0471
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 187.1847
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 192.7863
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 186.1800
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.0776
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.7884
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.3511
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 188.1810
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 197.9547
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.1603
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 53.8126
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 6
+Train loss 5.558981279037988
+Val loss 5.466574756390941
+Best Epoch :  6
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_6.pth
+*****************************************
+Epoch 6 information saved to ./sim_logdir_3/sim_6.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.0599
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.8515
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.0907
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.0524
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.0259
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.5079
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.5994
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.7961
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.5650
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.0726
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 178.9494
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.5445
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 218.3659
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.8972
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.4463
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.2848
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 178.6597
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.8972
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.9217
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.3628
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.4707
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.5524
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 188.6985
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.5494
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.7824
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.3359
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 183.8679
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.8924
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.4648
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 168.8858
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 201.6398
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.7136
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.5643
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.9903
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 178.2645
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.3705
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.4169
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.4025
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.2217
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 196.3929
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.3683
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.3254
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 183.1430
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 185.3179
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.8825
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 191.5845
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.2656
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 187.3701
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.0332
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.8231
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.5155
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.6811
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.2375
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.9303
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.8018
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 185.6553
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.4691
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 168.5097
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.1970
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.7249
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.6359
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.5540
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.1527
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.9836
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.1284
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.4933
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.8371
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 185.5894
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.0717
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.3024
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 198.7906
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 195.2068
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.1969
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.1201
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.1186
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.8868
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.1936
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.1247
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.5948
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 189.1872
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.9233
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.9840
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.8771
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 186.0100
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 190.2266
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 168.8305
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.8376
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.2744
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.7199
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.4461
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.1706
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.2074
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.2956
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.9686
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 187.8817
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.9680
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.4611
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.1604
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.7576
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.0201
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 198.2073
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.8417
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.1289
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.1745
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.2054
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.2441
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 197.2970
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.7877
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.2107
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.9044
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 190.5903
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.2639
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.0020
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.7738
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 65.0267
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 7
+Train loss 5.350398311526373
+Val loss 5.310025560726088
+Best Epoch :  7
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_7.pth
+*****************************************
+Epoch 7 information saved to ./sim_logdir_3/sim_7.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.8532
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 185.5027
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.5711
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.7818
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 187.1340
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.5959
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.9885
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.4601
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.4918
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.3437
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.1757
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.2621
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.8981
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.6844
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.7455
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.4564
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.5363
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 168.5445
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.8187
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.0003
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 182.4408
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 211.5450
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.7356
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.3489
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.0144
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.9704
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.4995
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.9121
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 197.0126
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.0304
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.4444
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 202.2616
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.2905
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.4248
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.8005
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.9140
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 187.7176
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.8610
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.8444
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.1703
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 168.8306
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 186.4535
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.1499
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.1804
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.6994
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.3735
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.1994
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 212.7543
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.0791
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.6561
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.6123
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.9088
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 182.4282
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 168.3116
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.6191
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.1534
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.6408
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 191.2668
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.0399
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.7812
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.9758
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.1190
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.1016
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 189.9866
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.7235
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.2321
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.7699
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 188.4086
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.6102
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.5321
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.8113
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 182.7520
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 188.0228
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.2793
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.5385
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.8837
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.8105
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.6898
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 209.5194
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.7276
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.9000
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.7330
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.7430
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.6014
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.4631
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.0500
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 168.5268
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 188.9125
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.9281
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.6682
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.5915
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.7304
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.8193
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.9490
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.8881
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.5996
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.8693
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.3230
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.2412
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.3234
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 190.1409
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.1723
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.9683
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.7846
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.0396
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.7804
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.2851
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.6185
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 183.5062
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.2991
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.6419
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.0989
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.2255
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.5280
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 52.7659
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 8
+Train loss 5.207551691889861
+Val loss 5.09522813289755
+Best Epoch :  8
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_8.pth
+*****************************************
+Epoch 8 information saved to ./sim_logdir_3/sim_8.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.1580
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.1909
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.5396
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.0755
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.3970
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.1512
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.0154
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.4898
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.2405
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.7514
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.8427
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.3452
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.6390
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.5056
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.6633
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.9576
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 181.0571
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.4373
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.2728
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.6172
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 188.7295
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.9655
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.8697
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.2340
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.7354
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.4351
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.4163
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.8060
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 185.3854
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.3951
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.3846
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.7187
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.3313
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.6179
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 178.8002
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.9175
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.9754
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.6883
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 189.8469
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.6452
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 192.9231
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.3575
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.2053
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.9277
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 188.8712
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 183.2043
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.3933
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.9614
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.8340
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.3657
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.9681
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.0569
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 198.0122
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.0770
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.6871
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 116.5890
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.9652
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.7340
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.1791
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.2302
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 112.4441
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.2696
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.7994
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.8329
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.8308
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.3317
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 189.6819
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.4004
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.5579
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.0111
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.7997
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.0610
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.1257
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 189.0829
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.8288
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.3339
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.5935
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.3631
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 198.9367
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.2455
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.2309
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.7196
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.1940
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.4081
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.8094
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.2024
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.7570
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.7608
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.8249
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.1747
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.3428
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.8712
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.3102
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.0725
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.9499
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.8158
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 182.3686
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 122.1760
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.4682
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.6137
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.7719
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.7452
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.0983
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.0908
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.9270
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.1689
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.9279
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.7451
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.2636
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.1535
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.9076
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 178.7683
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.6632
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.0324
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 54.4792
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 9
+Train loss 4.987190724070785
+Val loss 4.98804014689444
+Best Epoch :  9
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_9.pth
+*****************************************
+Epoch 9 information saved to ./sim_logdir_3/sim_9.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.5419
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.2698
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.5976
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.5430
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.3624
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.5610
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.6446
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.0608
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.0365
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.2027
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.5221
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.0133
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.0422
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.6959
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.3790
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 186.0931
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.2387
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.6395
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.3898
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.4736
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.9461
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.6386
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.5861
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.7491
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.4440
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.4349
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.8701
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.3933
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.1723
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.4114
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.0861
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.4415
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.2971
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.3288
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.9103
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.9258
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.7969
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.9533
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.1094
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.9073
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.8533
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.2139
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.1172
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.1648
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.1810
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.0323
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 185.8566
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.5365
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.4956
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.5300
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.6458
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.0780
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.8659
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.2589
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.1971
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.7492
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.3684
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.0754
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 186.6296
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.0519
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.6073
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.1041
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.8168
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.5847
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.8738
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.2173
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.2607
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.6059
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.7857
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.6600
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.7109
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.1888
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.6302
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.7450
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.8292
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.0740
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.4345
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.9733
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.4741
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.2480
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 168.9565
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.1548
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.6181
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.4893
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.7457
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.5245
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.9505
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.3660
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.3650
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 168.0127
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.9579
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.8217
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 117.6746
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.9541
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.9066
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.2618
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.7759
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 192.0814
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.9655
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.6620
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.2302
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.9810
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.1215
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 178.5340
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.2633
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.8590
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.2347
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.4703
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.0535
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.8023
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.8044
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.7144
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.9726
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.5932
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 38.1513
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 10
+Train loss 4.823303306060399
+Val loss 4.726459983718896
+Best Epoch :  10
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_10.pth
+*****************************************
+Epoch 10 information saved to ./sim_logdir_3/sim_10.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.7722
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 122.8964
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.3793
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.3796
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.8751
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 168.2103
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.9260
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.7352
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.4472
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.8494
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.3662
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.5939
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.5033
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.8771
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 107.6722
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.4873
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.3174
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 108.5864
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.2343
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.8940
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.8322
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 168.9521
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.0965
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.6143
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 107.2645
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.6895
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.4015
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.1719
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.4341
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.3449
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.6747
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.8099
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.2354
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.7910
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.3386
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.2087
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.4789
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 99.9520
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.2737
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.8341
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.1451
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.2960
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.2213
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.4465
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.6228
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.7818
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.9341
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.5169
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.0359
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.3594
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.0238
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.6788
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.6437
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.2517
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 119.1362
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.1803
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.6301
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.1839
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.1389
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.8432
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.5799
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.5266
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.2308
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.0729
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.7428
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.1875
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.5730
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.4354
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.1770
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.9562
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.0575
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.3382
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.6521
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.7846
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.1400
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.0982
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.1284
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.0378
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.6851
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.7250
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.8025
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.6528
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.1417
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.0162
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.2710
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.0981
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.4792
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 183.6555
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.7374
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.0230
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.3293
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.5409
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.1704
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.6750
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.9984
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.9268
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.5827
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.3836
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.9533
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.7850
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.2527
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 183.2385
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.3621
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.7522
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.1112
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.1641
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.3585
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.3447
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.3657
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.6656
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.2092
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.4613
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.6660
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.7534
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 40.8208
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 11
+Train loss 4.66421089266193
+Val loss 4.763092468166796
+*****************************************
+Epoch 11 information saved to ./sim_logdir_3/sim_11.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.3112
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 194.0578
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.2225
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.3609
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.2466
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.1821
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.9634
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.8490
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.8592
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.8463
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.6852
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.4183
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.5142
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.2135
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.3128
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.3873
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.3812
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.1249
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.7380
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.1071
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.9447
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.5819
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.3031
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.9773
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.6767
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.4778
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.7338
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.0028
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.5650
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.4140
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.5621
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.6702
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.3860
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.2658
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.6878
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.2072
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.6098
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 108.1368
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.8737
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.2191
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.3631
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.4389
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.5521
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.9754
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.4958
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.2855
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.0224
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.1069
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.6254
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.7198
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.3329
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.2429
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.3825
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 179.0761
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.5548
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.2981
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.5611
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.5341
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.6575
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.1364
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.4650
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.2894
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.4436
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.3935
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.4991
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.0481
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.6051
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.0608
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.1908
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.6823
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 191.7864
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.1513
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.2256
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.8208
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.0170
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 105.0385
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.0324
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.8387
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.7975
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.4384
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.1521
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.1616
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.9555
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.3032
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.3071
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.5245
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.4039
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.0516
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.8164
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.1093
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.1133
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.0128
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.1385
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.4493
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.3859
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.5301
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.9399
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.5415
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 102.4812
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.4132
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.1508
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.4776
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.9984
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.4778
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 115.1322
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.9274
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.8170
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.1628
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.4840
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.3246
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.9013
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.5983
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.8496
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.7025
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 46.4444
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 12
+Train loss 4.673818516842033
+Val loss 4.438162179237947
+Best Epoch :  12
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_12.pth
+*****************************************
+Epoch 12 information saved to ./sim_logdir_3/sim_12.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.0614
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.2160
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.7780
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.2808
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.8043
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.6198
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.0634
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.5233
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.3444
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.3996
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.9931
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.3903
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.2340
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.9352
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.1117
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.9989
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.9505
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.8786
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.3565
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.8353
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.3062
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 112.4721
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.0265
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.5619
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.2200
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.6001
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.5909
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 178.5417
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.1630
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.2234
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.9576
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.4415
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.1107
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.6704
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.4790
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.7450
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.7042
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.8504
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.2346
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.5009
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.4098
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 196.9593
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.5947
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.0744
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.1826
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 184.8510
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.5824
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.2473
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.1855
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 170.6141
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.6499
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.2841
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 175.9712
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.9157
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.5529
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.7802
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.7907
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.5792
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.2189
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.7811
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.4793
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.4548
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 109.7640
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 188.9976
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.6234
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.5042
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.5426
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 117.6450
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.9676
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.5328
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.8268
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.3249
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.1863
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.5881
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 112.4684
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.5076
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.5022
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.0094
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.2022
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.3052
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.5125
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 117.4808
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.9343
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 117.1823
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.5416
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.1452
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.5437
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.0287
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.5340
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.0023
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.5828
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.0087
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.6172
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.6244
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.1641
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.6322
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.1931
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.8694
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.9862
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.5591
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.9968
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.1084
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.8420
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.8873
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.3742
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.5551
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.1264
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.3845
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.9684
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 107.8703
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.4159
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.6364
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.2255
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 105.6426
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 49.6085
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 13
+Train loss 4.6019735156463515
+Val loss 4.360216013194984
+Best Epoch :  13
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_13.pth
+*****************************************
+Epoch 13 information saved to ./sim_logdir_3/sim_13.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 107.2436
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.4742
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 108.7875
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 166.8961
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.9512
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.8051
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.0550
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 117.0862
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.4651
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.5575
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.6074
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.0239
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.7006
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.6436
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.1816
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.1854
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.8282
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.3234
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.6881
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.6427
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.9664
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.6201
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.1738
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.3569
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 119.4612
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 187.8913
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.7971
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 185.1688
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.8504
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.3831
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.7452
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.3105
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 104.7023
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.8848
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.2196
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.5226
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.2443
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.2642
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.3192
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.5437
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.6830
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.8437
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.2296
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.2278
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 119.8984
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.2182
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.7850
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.7612
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.4809
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.8935
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.7547
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 112.2713
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.2914
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.7476
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.3582
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.6817
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.5357
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.5894
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.1445
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 115.5506
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.5074
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.2594
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.3393
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.9832
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.9613
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.8564
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.1403
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.9039
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.5867
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.9044
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.4170
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.7483
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.1646
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.9559
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.0624
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.3367
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 119.9493
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.9242
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.5798
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.9930
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.6481
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.8080
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.3174
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.0105
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.4810
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 111.1573
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.0386
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.5058
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.2559
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.9022
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 119.5088
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.5371
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.3193
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.7322
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 104.4477
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 101.8243
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.9969
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.9997
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.5873
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.6344
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.6959
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.2952
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.3200
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.6650
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 119.7319
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.4120
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.3178
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 94.1230
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.6530
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.9657
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.0629
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.9698
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.9032
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.4014
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 31.4238
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 14
+Train loss 4.40058732534504
+Val loss 4.268665936649494
+Best Epoch :  14
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_14.pth
+*****************************************
+Epoch 14 information saved to ./sim_logdir_3/sim_14.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.1380
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.7964
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.3186
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.3285
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.2966
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.5627
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.8396
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 171.1119
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.7661
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.1605
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.2411
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.4347
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 117.7251
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.3959
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.8348
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.5520
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 114.7821
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.0245
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.3844
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 109.4272
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.1297
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.4175
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.1606
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.6252
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 115.5715
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.2666
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.3006
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.3924
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 116.6816
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 178.1516
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.5880
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.9376
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.7998
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.4196
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.1991
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.9184
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 119.7967
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.8404
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 203.6417
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.5614
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.8914
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.9924
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 115.6258
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.7194
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.2988
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 112.0331
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 115.4273
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 96.1930
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.4612
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.5566
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.1077
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.9134
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.8540
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.3035
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.4806
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.5685
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.2332
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.6119
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.1069
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.5337
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 112.6055
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 109.7899
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.9120
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 113.9118
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.2507
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.0361
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.2124
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.8371
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.3920
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.2051
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.6633
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 115.1095
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.9441
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.3358
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.6688
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.1134
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.3476
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.5435
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.2964
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.2998
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.3111
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.5004
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 111.5880
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.3790
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.5746
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 108.9082
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.2713
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.9671
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.1177
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.0275
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.5246
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.3047
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.1464
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 116.5309
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.1694
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.7515
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.1458
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.4928
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.0880
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.1355
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.2808
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.3991
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.7187
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.9665
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.9938
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.7096
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.3831
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.3011
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.4303
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.7945
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.7614
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.6976
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.6627
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.7124
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 40.0183
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 15
+Train loss 4.267744666404756
+Val loss 4.318072329412908
+*****************************************
+Epoch 15 information saved to ./sim_logdir_3/sim_15.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.8666
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.4412
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.0061
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 113.6833
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 99.9978
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.0116
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.4914
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.8255
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.1598
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.3353
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.5761
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.6843
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 122.7327
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.0184
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 87.6660
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.7075
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.1823
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.8656
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.9442
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.0833
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.7883
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.3789
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.8285
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 197.3012
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.3878
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.1748
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 111.2507
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.0885
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.3632
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.2369
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 183.5559
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.2169
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.5332
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.6180
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.7389
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 117.1858
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.9101
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.8290
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.0573
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.4173
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.9120
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.4612
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.9668
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.6870
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.8218
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 174.2176
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.4141
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 94.2019
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.8248
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.2661
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.4630
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.8055
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.1524
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.9008
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 110.6087
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.4203
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.6266
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.9390
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.6558
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.0619
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.8590
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 105.8692
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.2484
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 105.1123
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.6784
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.5378
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 111.4327
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.6583
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.3223
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.0357
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.5886
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 115.1544
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.6386
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.2974
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.4904
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.9873
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.3605
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.6715
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 112.0764
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.3350
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 122.6982
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.2058
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.2730
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.1994
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 114.1776
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.4813
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.9579
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 107.5240
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.5839
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.2916
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.5990
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 122.0719
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 104.2023
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 122.5014
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.6496
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 107.9831
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.8949
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 116.1515
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 110.1430
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.2496
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.0877
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.2171
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.2907
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.6643
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.6043
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.5171
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.7410
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.6083
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.6884
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 104.8862
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.2547
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.6016
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 107.8742
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.1396
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 45.2401
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 16
+Train loss 4.226881437465837
+Val loss 4.240655830822317
+Best Epoch :  16
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_16.pth
+*****************************************
+Epoch 16 information saved to ./sim_logdir_3/sim_16.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.1577
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 116.7787
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.5360
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.7088
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.0660
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.9892
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.3155
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.5187
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.0760
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 180.9679
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.7164
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.3583
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.9201
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 114.4180
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.4112
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 110.5230
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.3820
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.8980
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.1081
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.4053
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 109.8131
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.8672
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.8505
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.5534
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.3403
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.8972
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.0689
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.3772
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.0769
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.5275
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.2619
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.1307
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.6804
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.7305
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.7015
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.2148
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.7883
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.6400
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.1171
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.4016
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.8839
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.2065
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.0413
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 113.0575
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 177.3242
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.2615
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.2318
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.3841
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.2968
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.2090
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.5586
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.1370
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 119.9653
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 119.3901
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.4295
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.4121
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 117.8643
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.7050
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.7361
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.0168
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 103.9977
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 161.7970
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.9835
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.6182
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 99.8496
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.8612
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.4209
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.9820
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 165.2123
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.2129
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.1661
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.4228
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.7235
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.2777
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.9262
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 173.1311
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.9971
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.7643
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 113.0387
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.5225
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 104.6467
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.9200
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 109.9997
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.3511
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.8837
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.2294
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.0895
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 105.5421
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.4352
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.9953
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.7683
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.5335
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.9993
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.3918
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 116.4123
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.0693
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.0464
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 107.6212
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.6463
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.5838
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.2376
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.8486
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.1971
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.2353
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.6817
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.8688
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.8275
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.0492
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.3429
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.9969
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.0576
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.9389
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 122.2955
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.1632
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 29.5118
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 17
+Train loss 4.259559850283547
+Val loss 4.162126461046851
+Best Epoch :  17
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_17.pth
+*****************************************
+Epoch 17 information saved to ./sim_logdir_3/sim_17.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.7906
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.0409
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.3135
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.2940
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.6772
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 110.6015
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.3725
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 107.1239
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 119.8169
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 97.2571
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 117.6992
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 107.9134
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.7392
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.0624
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.8335
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 115.8265
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 86.6052
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 109.0583
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.7884
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.4414
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.0221
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 162.5543
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.7475
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.9669
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.2335
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 115.4055
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.4191
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.6288
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 107.6725
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.9769
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 169.6858
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.4231
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.8715
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 111.8122
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.2438
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.2647
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 96.7622
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 111.9543
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.8498
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.5388
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 152.6369
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.1692
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.9278
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.2396
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.9356
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.3632
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.7281
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 107.7571
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.1198
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.9840
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 114.6746
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 154.2440
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 109.9964
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 96.8279
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 122.7219
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.1381
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.4279
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.1206
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.5087
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.3982
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.8467
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.8558
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 116.1108
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.1859
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.2750
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.7293
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.3575
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.7963
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.1356
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 106.6124
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 113.3164
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.0093
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.7469
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.2546
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 111.7246
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.0887
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 107.9922
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.6767
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.8853
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.7054
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.7155
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.0724
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.2037
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 113.6658
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.6105
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.2073
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.2753
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.6654
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.8881
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.2810
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 89.8642
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.9397
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.4148
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 110.7439
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 106.2694
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.3694
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.5337
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.9388
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 104.0725
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.1799
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.4192
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.0972
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.9166
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.8878
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.2209
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.3144
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.3055
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 86.8517
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.4488
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.6721
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 101.8145
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.4268
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 113.2688
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.1357
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 44.2552
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 18
+Train loss 4.023082798835064
+Val loss 4.0556796297871305
+Best Epoch :  18
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_18.pth
+*****************************************
+Epoch 18 information saved to ./sim_logdir_3/sim_18.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 112.1198
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 107.6533
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.2808
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 103.9946
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.9133
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 114.7200
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.1423
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.1470
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 109.1209
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 114.6648
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.2999
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 110.7571
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 119.3335
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 186.2619
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.8083
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.1107
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.2692
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.5826
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.5007
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.0263
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 106.5363
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 114.3803
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.3524
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 168.2453
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.0685
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 122.1776
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 113.2775
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.6254
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.9328
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.9857
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.8661
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 117.8239
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.4398
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.6362
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 111.1514
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.9395
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.0672
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.5175
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 119.3013
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 96.0407
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.8907
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.2330
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 167.0595
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.3764
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.8738
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.5179
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.5287
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 158.6749
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.2419
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 144.0730
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 116.9101
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.1345
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.8076
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.1045
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.1639
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 111.2873
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.5056
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 108.5341
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.3971
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.9777
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 105.7770
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.2376
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.1617
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.5296
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.7123
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 176.0189
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.1321
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.3627
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.3279
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.8823
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 147.7068
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.5312
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.0072
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 101.4490
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.8850
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.0924
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.3808
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 117.8747
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.9178
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 104.5871
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 156.7891
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 105.0314
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.3630
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 143.2258
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.1976
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 85.3722
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 112.7575
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 110.7517
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.6102
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.3559
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.5894
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 105.9337
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.5311
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.0837
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.1941
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.8000
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 108.1733
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.1131
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.6570
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 117.2451
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.3838
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.0883
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.2386
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.9502
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.6818
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 113.3046
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.6417
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.6171
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.5058
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.6313
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.8356
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 127.9445
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 98.7969
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.5928
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 51.5519
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 19
+Train loss 4.065722202531429
+Val loss 4.154594931595062
+*****************************************
+Epoch 19 information saved to ./sim_logdir_3/sim_19.json
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 155.8768
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.0553
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 109.9806
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.4688
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.9632
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 112.5260
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.4272
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 95.6551
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 160.3282
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 157.9891
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.6555
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 108.2904
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.5324
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 117.8543
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.4398
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.6928
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 137.9141
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 124.4744
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 85.1252
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.3311
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 103.6800
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 95.5713
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.5044
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.2860
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 146.4823
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 163.4471
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.5059
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.0117
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 119.4836
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 116.0200
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 95.7264
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 109.3402
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 113.4282
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 172.5676
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 145.1598
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 113.3659
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.9370
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.9659
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.6958
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.4424
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.1734
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.3864
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.9690
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 119.0356
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 92.2611
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.1576
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.0174
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 149.3042
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.7175
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.1677
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 129.2512
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.0952
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.1740
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 110.7394
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.7092
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.7447
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.1818
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.1964
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.5515
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 133.1875
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 150.6393
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.5183
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.6596
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 138.2702
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.3939
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 153.3362
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 107.8231
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 159.1082
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.9128
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 112.1661
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 108.5696
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 112.6024
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 123.7335
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 103.6931
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 113.1194
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 116.8518
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.7408
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 87.1845
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.9594
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.8541
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 136.3701
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 117.8561
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 88.5306
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 125.8826
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.7627
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 142.8363
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 120.6271
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.5495
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 94.1455
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 121.5966
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 128.9300
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 139.7360
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 112.5096
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 113.1629
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.5807
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 94.6807
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 106.8844
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.3866
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 151.1978
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 130.7396
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 135.5460
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 122.3072
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 141.7860
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 100.9188
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 134.1083
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 115.4772
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 132.2220
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 126.3810
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 118.6653
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 164.0569
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 140.6593
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 148.6363
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 131.2085
+combined_features :  torch.Size([6, 32, 6464])
+Loss: 106.3721
+combined_features :  torch.Size([6, 11, 6464])
+Loss: 45.4141
+VALIDATION
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 32, 6464])
+combined_features :  torch.Size([6, 6, 6464])
+Epoch 20
+Train loss 3.983078432461055
+Val loss 3.980302825500583
+Best Epoch :  20
+Best Model is saved to : /project/g/r13922043/dave_model/similarity_3/verification_20.pth
+*****************************************
+Epoch 20 information saved to ./sim_logdir_3/sim_20.json

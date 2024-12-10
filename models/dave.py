@@ -483,7 +483,7 @@ class COTR(nn.Module):
             end_time = time.time()
             print(f"\t- Predict boxes {end_time - start_time:.0f} seconds", flush=True,)
         else:
-            tblr = self.box_predictor(self.upscale(backbone_features), self.upscale(correlation_maps))
+            tblr = self.box_predictor(backbone_features,correlation_maps)
 
         generated_bboxes: BoxList = self.generate_bbox(outputR, tblr)[0]
         bboxes_p = generated_bboxes.box
@@ -498,7 +498,7 @@ class COTR(nn.Module):
             ],
             dim=1,
         ).to(backbone_features.device)
-        print("Detection Stage End")
+        # Detection Stage End
         #####################
         # VERIFICATION STAGE
         #####################
@@ -576,7 +576,7 @@ class COTR(nn.Module):
             cropped_density = outputR[0, 0, y_min:y_max, x_min:x_max]
             object_count = round(cropped_density.sum().item(), 1)
             density_list.append(object_count)
-        print("density_list",density_list)
+        # print("density_list",density_list)
         # Predicted by Model
         bbox_embedding = self.bbox_network(bboxes_.unsqueeze(0)).permute(1, 0, 2)
         combined_features = torch.cat((feat_pairs, bbox_embedding), dim=-1)
@@ -607,9 +607,9 @@ class COTR(nn.Module):
         dst_mtx = ( self.cosine_sim(feat_pairs[None, :], feat_pairs[:, None]).cpu().numpy())
 
         dst_mtx[dst_mtx < 0] = 0
-        print("Verification Stage")
+        # Verification Stage
         if self.zero_shot and self.prompt_shot:
-            print("Zero Shot and Prompt Shot")
+            # Zero Shot and Prompt Shot
             preds = generated_bboxes
             k, _, _ = self.eigenDecomposition(dst_mtx)
             if len(k) > 1 or (len(k) > 1 and k[0] > 1):
@@ -644,7 +644,7 @@ class COTR(nn.Module):
             return outputR, [], tblr, preds
 
         elif self.zero_shot and not self.prompt_shot:
-            print("Zero Shot and Not Prompt Shot")
+            # Zero Shot and Not Prompt Shot
             k, _, _ = self.eigenDecomposition(dst_mtx)
             preds = generated_bboxes
             if len(k) > 1 or (len(k) > 1 and k[0] > 1):
@@ -672,7 +672,7 @@ class COTR(nn.Module):
             return outputR, [], tblr, preds
 
         else:
-            print("Free Shot")
+            # Free Shot
             dst_mtx[dst_mtx < 0] = 0  # similarity matrix
             k, _, _ = self.eigenDecomposition(dst_mtx)
             exemplar_bboxes = generated_bboxes
@@ -700,8 +700,8 @@ class COTR(nn.Module):
 
             outputR_no_mask = outputR.clone()
             # outputR : [batch size, lastone[]]
-            print("outputR", outputR.shape) #
-            print("exemplar_bboxes", exemplar_bboxes.box.shape)
+            # print("outputR", outputR.shape) #
+            # print("exemplar_bboxes", exemplar_bboxes.box.shape)
             if mask is not None and np.any(mask == False):
                 outputR[0][0] = mask_density(outputR[0], exemplar_bboxes)
 

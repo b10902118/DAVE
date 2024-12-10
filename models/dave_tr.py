@@ -100,14 +100,15 @@ class COTR(nn.Module):
         feat_pairs = feat_embedding.permute(1, 0, 2)
         shape_or_objectness = shape_or_objectness.permute(1, 0, 2)
         combined_features = torch.cat((feat_pairs, shape_or_objectness), dim=-1)
-
+        print("combined_features : ",combined_features.shape)
         sim = list()
         class_ = []
         loss = torch.tensor(0.0).to(feat_pairs.device)
         o = torch.tensor(1).to(feat_pairs.device)
         n = torch.tensor(-1).to(feat_pairs.device)
         # combined_features reshape to [batchsize(32) * interest number(6), 6464]
-        combined_features = combined_features.view(-1, combined_features.shape[-1])       
+        # combined_features = combined_features.view(-1, combined_features.shape[-1])
+        '''       
         threshold = 0.8
         margin = 0.2
         for f1, f2 in itertools.combinations(zip(combined_features), 2):
@@ -123,6 +124,17 @@ class COTR(nn.Module):
             sim.append(sim_value.item())
         num_pairs = len(sim)
         loss = loss / num_pairs if num_pairs > 0 else loss
+        return loss, sim
+        '''
+
+        #combined_features = combined_features.reshape(bs,6,-1).permute(1, 0, 2)
+        #print(combined_features.shape)
+        for f1, f2 in itertools.combinations(zip(combined_features, [1, 1, 1, 2, 2, 2]), 2):
+            for i in range(f1[0].shape[0]):
+                loss += self.cos_loss(f1[0][i], f2[0][i], o if f1[1] == f2[1] else n)
+            sim.append(self.cosine_sim(f1[0], f2[0]))
+            class_.append([f1[1] == f2[1] for _ in range(bs)])
+
         return loss, sim
 
 

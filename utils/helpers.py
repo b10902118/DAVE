@@ -45,6 +45,7 @@ def mask_density(image_batch, boxes_batch, img=None):
     Returns:
         torch.Tensor: A tensor of shape (C, H, W) representing the masked image batch.
     """
+    
     if len(boxes_batch) < 1:
         return image_batch
     C, H, W = image_batch.shape
@@ -53,9 +54,12 @@ def mask_density(image_batch, boxes_batch, img=None):
     for box in boxes_batch.box.long():
         x1, y1, x2, y2 = box
         mask_tensor[:, y1:y2, x1:x2] = 1
-    max_bbx = boxes_batch[
-        torch.where(torch.median(boxes_batch.area()) == boxes_batch.area())[0].item()
-    ].box
+    # 找到與中位數相等的索引
+    indices = torch.where(torch.median(boxes_batch.area()) == boxes_batch.area())[0]
+
+    # 取第一個匹配的索引（或根據需求選擇其他方法）
+    if indices.numel() > 0:
+        max_bbx = boxes_batch[indices[0]].box
     max_wh_half = (
         2 * math.floor((max_bbx[3] - max_bbx[1]) / 2 / 2) + 1,
         2 * math.floor((max_bbx[2] - max_bbx[0]) / 2 / 2) + 1,

@@ -154,8 +154,9 @@ def evaluate(args):
     path = os.path.join(args.model_path, args.model_name + ".pth")
     print("path",path)
     model.load_state_dict(torch.load(path)["model"],strict=False,)
-    print("path",path)
-    bbox_weight = "/project/g/r13922043/dave_model/detection_3/DAVE_3_shot_4.pth"
+
+    bbox_weight = "/project/g/r13922043/dave_model/detection_3/DAVE_3_shot_8.pth"
+    print("bbox_weight",bbox_weight)
     model_state = torch.load(bbox_weight)
     pretrained_dict_box_predictor = {}
 
@@ -163,20 +164,12 @@ def evaluate(args):
         pretrained_dict_box_predictor[name.split("box_predictor.")[1]] = param
 
     model.module.box_predictor.load_state_dict(pretrained_dict_box_predictor,strict=False)
-    verification_path = "/project/g/r13922043/dave_model/similarity_2/verification_33.pth"
+    verification_path = "/project/g/r13922043/dave_model/similarity_2/verification_50.pth"
     pretrained_dict_feat = {
-        k.split("feat_comp.")[1]: v
-        for k, v in torch.load(verification_path)[
-            "model"
-        ].items()
-        if "feat_comp" in k
+        k.split("feat_comp.")[1]: v for k, v in torch.load(verification_path)[ "model"].items() if "feat_comp" in k
     }
     pretrained_dict_bbox = {
-        k.split("bbox_network.")[1]: v
-        for k, v in torch.load(verification_path)[
-            "model"
-        ].items()
-        if "bbox_network" in k
+        k.split("bbox_network.")[1]: v for k, v in torch.load(verification_path)["model"].items() if "bbox_network" in k
     }
     print("Verification model path : ",verification_path)
     model.module.feat_comp.load_state_dict(pretrained_dict_feat)
@@ -186,9 +179,9 @@ def evaluate(args):
 
 
     # just one, multiple processes stuck
-    plot_queue = multiprocessing.JoinableQueue()
-    plot_process = multiprocessing.Process(target=plotting_process, args=(plot_queue,))
-    plot_process.start()
+    # plot_queue = multiprocessing.JoinableQueue()
+    # plot_process = multiprocessing.Process(target=plotting_process, args=(plot_queue,))
+    # plot_process.start()
 
     bigs = {"val": [], "test": []}
     masked = {"val": [], "test": []}
@@ -236,6 +229,19 @@ def evaluate(args):
             idx = ids[0].item()
             img = img.to(device)
             ex_bboxes = ex_bboxes.to(device)
+
+            original_height, original_width = img.shape[2], img.shape[3]  # Assuming img is [batch_size, channels, height, width]
+    
+            # Calculate the scaling factors
+            scale_x_, scale_y_ = 512 / original_width, 512 / original_height
+            img = torch.nn.functional.interpolate(img, size=(512, 512), mode='bilinear', align_corners=False)
+            # Adjust bounding boxes
+            for bbox in ex_bboxes[0]:
+                x_min, y_min, x_max, y_max = bbox
+                bbox[0] = int(x_min * scale_x_)
+                bbox[1] = int(y_min * scale_y_)
+                bbox[2] = int(x_max * scale_x_)
+                bbox[3] = int(y_max * scale_y_)
 
             # record big images
             start_time = time.time()  # Start time measurement
@@ -293,7 +299,7 @@ def evaluate(args):
                 save_dir,
                 title_counts,
             )
-            plot_queue.put(arg)
+            # plot_queue.put(arg)
 
             # print(f"Added {idx} to queue", flush=True)
             # futures.append(executor.submit(visualize_wrapper, args))
@@ -323,8 +329,8 @@ def evaluate(args):
     with open("masked_images.json", "w") as f:
         json.dump(masked, f, indent=4)
 
-    plot_queue.put(None)
-    plot_process.join()
+    # plot_queue.put(None)
+    # plot_process.join()
 
 
 if __name__ == "__main__":
