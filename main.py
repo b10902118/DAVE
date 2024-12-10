@@ -151,19 +151,39 @@ def evaluate(args):
     model = DataParallel(
         build_model(args).to(device), device_ids=[gpu], output_device=gpu
     )
+    path = os.path.join(args.model_path, args.model_name + ".pth")
+    print("path",path)
+    model.load_state_dict(torch.load(path)["model"],strict=False,)
+    print("path",path)
+    bbox_weight = "/project/g/r13922043/dave_model/detection_3/DAVE_3_shot_4.pth"
+    model_state = torch.load(bbox_weight)
+    pretrained_dict_box_predictor = {}
 
-    model.load_state_dict(
-        torch.load(os.path.join(args.model_path, args.model_name + ".pth"))["model"],
-        strict=False,
-    )
+    for name, param in model_state["box_predictor"].items():
+        pretrained_dict_box_predictor[name.split("box_predictor.")[1]] = param
+
+    model.module.box_predictor.load_state_dict(pretrained_dict_box_predictor,strict=False)
+    verification_path = "/project/g/r13922043/dave_model/similarity_2/verification_33.pth"
     pretrained_dict_feat = {
         k.split("feat_comp.")[1]: v
-        for k, v in torch.load(os.path.join(args.model_path, "verification.pth"))[
+        for k, v in torch.load(verification_path)[
             "model"
         ].items()
         if "feat_comp" in k
     }
+    pretrained_dict_bbox = {
+        k.split("bbox_network.")[1]: v
+        for k, v in torch.load(verification_path)[
+            "model"
+        ].items()
+        if "bbox_network" in k
+    }
+    print("Verification model path : ",verification_path)
     model.module.feat_comp.load_state_dict(pretrained_dict_feat)
+    model.module.bbox_network.load_state_dict(pretrained_dict_bbox)
+
+
+
 
     # just one, multiple processes stuck
     plot_queue = multiprocessing.JoinableQueue()

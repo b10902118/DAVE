@@ -382,10 +382,10 @@ class COTR(nn.Module):
             query_pos_emb = None
 
         if self.num_decoder_layers > 0:
-            # objectness : [27, 4, 256 (every feature embedding)]
-            # appearance : [27, 4, 256 (every feature embedding)]
-            # memory : [4096, 4, 256 (every feature embedding)]
-            # pos_emb : [4096, 4, 256 (every feature embedding)]
+            # objectness    : [27, 4, 256 (every feature embedding)]
+            # appearance    : [27, 4, 256 (every feature embedding)]
+            # memory        : [4096, 4, 256 (every feature embedding)]
+            # pos_emb       : [4096, 4, 256 (every feature embedding)]
             # query_pos_emb.shape : [27, 4, 256 (every feature embedding)]
             weights = self.decoder(
                 objectness if objectness is not None else appearance,
@@ -465,7 +465,10 @@ class COTR(nn.Module):
 
         if self.det_train:
             # Top, Bottom, Left, and Right
-            tblr = self.box_predictor(self.upscale(backbone_features), self.upscale(correlation_maps))
+            # backbone_features : [(batch size) 4, (feature embedding) 3584, (w) 64, (h) 64]
+            # correlation_maps : [(batch size) 4, (feature embedding) 256, (w) 64, (h) 64]
+            # [4, 256, 64, 64]
+            tblr = self.box_predictor(backbone_features, correlation_maps)
             location = self.compute_location(tblr)
             return outputs_R[-1], outputs_R[:-1], tblr, location
 
@@ -478,14 +481,9 @@ class COTR(nn.Module):
             )
             self.box_predictor = self.box_predictor.to(backbone_features.device)
             end_time = time.time()
-            print(
-                f"\t- Predict boxes {end_time - start_time:.0f} seconds",
-                flush=True,
-            )
+            print(f"\t- Predict boxes {end_time - start_time:.0f} seconds", flush=True,)
         else:
-            tblr = self.box_predictor(
-                self.upscale(backbone_features), self.upscale(correlation_maps)
-            )
+            tblr = self.box_predictor(self.upscale(backbone_features), self.upscale(correlation_maps))
 
         generated_bboxes: BoxList = self.generate_bbox(outputR, tblr)[0]
         bboxes_p = generated_bboxes.box
@@ -562,13 +560,15 @@ class COTR(nn.Module):
         )
         '''
 
-        # visualize
+        # visualize for using
+        '''
         plt.figure(figsize=(6, 6))
         plt.imshow(outputR[0][0].cpu(), cmap="viridis")  # 替換 cmap 調整配色
         plt.colorbar(label="Density")
         plt.savefig("visualize.jpg", dpi=300, bbox_inches="tight")
         print("bboxes_",bboxes_.shape)
         print("outputR",outputR[0][0].shape)
+        '''
         density_list = []
         for bbox in bboxes_:
             x_min, y_min, x_max, y_max = bbox[1:]
@@ -605,7 +605,6 @@ class COTR(nn.Module):
         # feat_pairs[None, :] : [1 ,number of bounding box, feature size]
         # feat_pairs[:, None] : [number of bounding box, 1, feature size]
         dst_mtx = ( self.cosine_sim(feat_pairs[None, :], feat_pairs[:, None]).cpu().numpy())
-        print("dst_mtx", dst_mtx.shape)
 
         dst_mtx[dst_mtx < 0] = 0
         print("Verification Stage")

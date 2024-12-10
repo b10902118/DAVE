@@ -45,13 +45,7 @@ def demo(args):
         strict=False,
     )
     path = '/project/g/r13922043/dave_model/similarity_2/verification_18.pth'
-    pretrained_dict_feat = {
-        k.split("feat_comp.")[1]: v
-        for k, v in torch.load(path)[
-            "model"
-        ].items()
-        if "feat_comp" in k
-    }
+    pretrained_dict_feat = {k.split("feat_comp.")[1]: v for k, v in torch.load(path)["model"].items() if "feat_comp" in k}
     model.module.feat_comp.load_state_dict(pretrained_dict_feat)
     model.module.
     model.eval()

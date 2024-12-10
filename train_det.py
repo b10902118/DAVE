@@ -5,7 +5,7 @@ from utils.arg_parser import get_argparser
 from utils.losses import Criterion, Detection_criterion
 from time import perf_counter
 import argparse
-import os
+import os, json
 from torchvision.ops import box_iou
 import torch
 from torch import nn
@@ -32,25 +32,16 @@ def generate_bbox(density_map, tlrb):
         dmap[mask] = 0
         a = skimage.feature.peak_local_max(dmap, exclude_border=0)
 
-        boxes = []
-        scores = []
+        boxes, scores= [], []
         b, l, r, t = tlrb[i]
 
         for x11, y11 in a:
-            box = [
-                y11 - b[x11][y11].item(),
-                x11 - l[x11][y11].item(),
-                y11 + r[x11][y11].item(),
-                x11 + t[x11][y11].item(),
-            ]
+            box = [ y11 - b[x11][y11].item(),
+                    x11 - l[x11][y11].item(),
+                    y11 + r[x11][y11].item(),
+                    x11 + t[x11][y11].item()]
             boxes.append(box)
-            scores.append(
-                1
-                - math.fabs(
-                    density[int(box[1]) : int(box[3]), int(box[0]) : int(box[2])].sum()
-                    - 1
-                )
-            )
+            scores.append(1 - math.fabs(density[int(box[1]) : int(box[3]), int(box[0]) : int(box[2])].sum() - 1))
 
         b = BoxList(boxes, (density_map.shape[3], density_map.shape[2]))
         b.fields["scores"] = torch.tensor(scores)
@@ -63,8 +54,7 @@ def generate_bbox(density_map, tlrb):
 
 def reduce_dict(input_dict, average=False):
     with torch.no_grad():
-        names = []
-        values = []
+        names, values = [], []
         for k in sorted(input_dict.keys()):
             names.append(k)
             values.append(input_dict[k])
@@ -77,7 +67,6 @@ def reduce_dict(input_dict, average=False):
 
 
 def train(args):
-    
     if args.skip_train:
         print("SKIPPING TRAIN")
         return
@@ -112,7 +101,7 @@ def train(args):
 
     # Freeze all parameter
     for name, param in model.named_parameters():
-    param.requires_grad = False
+        param.requires_grad = False
     # Only train the box_predictor
     for name, param in model.named_parameters():
         if "box_predictor" in name:
@@ -144,190 +133,154 @@ def train(args):
                                         True,               # config.center_sample,
                                         [1],                # config.fpn_strides,
                                         5,)                  # config.pos_radius,
-
-    train = DATASETS[args.dataset](
-        args.data_path,
-        args.image_size,
-        split="train",
-        num_objects=args.num_objects,
-        tiling_p=args.tiling_p,
-        zero_shot=args.zero_shot or args.orig_dmaps,
-        skip_cars=args.skip_cars,
-    )
-    val = DATASETS[args.dataset](
-        args.data_path,
-        args.image_size,
-        split="val",
-        num_objects=args.num_objects,
-        tiling_p=args.tiling_p,
-        zero_shot=args.zero_shot or args.orig_dmaps,
-    )
-    train_loader = DataLoader(
-        train,
-        shuffle=True,
-        batch_size=args.batch_size,
-        drop_last=True,
-        num_workers=args.num_workers,
-    )
-    val_loader = DataLoader(
-        val,
-        shuffle=False,
-        batch_size=args.batch_size,
-        drop_last=False,
-        num_workers=args.num_workers,
-    )
+    # Load Dataset
+    train = DATASETS[args.dataset]( args.data_path,
+                                    args.image_size,
+                                    split="train",
+                                    num_objects=args.num_objects,
+                                    tiling_p=args.tiling_p,
+                                    zero_shot=args.zero_shot or args.orig_dmaps,
+                                    skip_cars=args.skip_cars,)
+    val = DATASETS[args.dataset](   args.data_path,
+                                    args.image_size,
+                                    split="val",
+                                    num_objects=args.num_objects,
+                                    tiling_p=args.tiling_p,
+                                    zero_shot=args.zero_shot or args.orig_dmaps,)
+    train_loader = DataLoader(train, shuffle=True, batch_size=args.batch_size, drop_last=True, num_workers=args.num_workers,)
+    val_loader = DataLoader( val, shuffle=False, batch_size=args.batch_size, drop_last=False, num_workers=args.num_workers,)
+    # Change Path to save the log
+    det_logdir = "./det_logdir_3"
+    os.makedirs(det_logdir, exist_ok=True)
     print("NUM STEPS", len(train_loader) * args.epochs)
-
+    print("Trainable Parameters:")
+    for name, param in model.named_parameters():
+        if param.requires_grad:
+            print(f"{name}: {param.shape}")
     for epoch in range(start_epoch + 1, args.epochs + 1):
-        start = perf_counter()
-        train_losses = {
-            k: torch.tensor(0.0).to(device) for k in criterion.losses.keys()
-        }
-        val_losses = {k: torch.tensor(0.0).to(device) for k in criterion.losses.keys()}
-        aux_train_losses = {
-            k: torch.tensor(0.0).to(device) for k in aux_criterion.losses.keys()
-        }
-        aux_val_losses = {
-            k: torch.tensor(0.0).to(device) for k in aux_criterion.losses.keys()
-        }
-        train_ae = torch.tensor(0.0).to(device)
-        val_ae = torch.tensor(0.0).to(device)
-        mAP = torch.tensor(0.0).to(device)
+        start               = perf_counter()
+        train_losses        = {k: torch.tensor(0.0).to(device) for k in criterion.losses.keys()}
+        val_losses          = {k: torch.tensor(0.0).to(device) for k in criterion.losses.keys()}
+        aux_train_losses    = {k: torch.tensor(0.0).to(device) for k in aux_criterion.losses.keys()}
+        aux_val_losses      = {k: torch.tensor(0.0).to(device) for k in aux_criterion.losses.keys()}
+        train_ae            = torch.tensor(0.0).to(device)
+        val_ae              = torch.tensor(0.0).to(device)
+        mAP                 = torch.tensor(0.0).to(device)
 
         model.train()
-
-        for img, bboxes, density_map, ids, scale_x, scale_y, _ in tqdm(
-            train_loader, desc="Training Progress", unit="batch"
-        ):
-            img = img.to(device)
-            bboxes = bboxes.to(device)
-            density_map = density_map.to(device)
-            targets = (
-                BoxList(bboxes, (args.image_size, args.image_size), mode="xyxy")
-                .to(device)
-                .resize((args.fcos_pred_size, args.fcos_pred_size))
-            )
-            targets.fields["labels"] = [1 for __ in range(args.batch_size * 2)]
-            optimizer.zero_grad()
-
-            outR, aux_R, tblr, location = model(img, bboxes)
-
-            if args.normalized_l2:
-                with torch.no_grad():
-                    num_objects = density_map.sum()
-            else:
-                num_objects = None
-
-            main_losses = criterion(outR, density_map, bboxes, num_objects)
-            aux_losses = [
-                aux_criterion(aux, density_map, bboxes, num_objects) for aux in aux_R
-            ]
-            det_loss = det_criterion(location, tblr, targets)
-            del targets
-            loss = (
-                sum([ml for ml in main_losses.values()]) * 0
-                + sum([al for alls in aux_losses for al in alls.values()]) * 0
-                + det_loss  # + l
-            )
-            loss.backward()
-            if args.max_grad_norm > 0:
-                nn.utils.clip_grad_norm_(model.parameters(), args.max_grad_norm)
-            optimizer.step()
-            train_losses = {
-                k: train_losses[k] + main_losses[k] * img.size(0)
-                for k in train_losses.keys()
-            }
-            aux_train_losses = {
-                k: aux_train_losses[k] + sum([a[k] for a in aux_losses]) * img.size(0)
-                for k in aux_train_losses.keys()
-            }
-            train_ae += torch.abs(
-                density_map.flatten(1).sum(dim=1) - outR.flatten(1).sum(dim=1)
-            ).sum()
-
-        model.eval()
-        with torch.no_grad():
-            for img, bboxes, density_map, ids, scale_x, scale_y, _ in tqdm(
-                val_loader, desc="Validation Progress", unit="batch"
-            ):
-                gt_bboxes, _ = val.get_gt_bboxes(ids)
-                img = img.to(device)
-                bboxes = bboxes.to(device)
+        with tqdm(train_loader, desc="Training Progress", unit="batch") as pbar:
+            for img, bboxes, density_map, ids, scale_x, scale_y, _ in pbar:
+                img     = img.to(device)
+                bboxes  = bboxes.to(device)
                 density_map = density_map.to(device)
-
+                targets = ( BoxList(bboxes, (args.image_size, args.image_size), mode="xyxy").to(device)
+                            .resize((args.fcos_pred_size, args.fcos_pred_size)))
+                targets.fields["labels"] = [1 for __ in range(args.batch_size * 2)]
                 optimizer.zero_grad()
 
                 outR, aux_R, tblr, location = model(img, bboxes)
-
-                boxes_pred = generate_bbox(outR, tblr)
-
-                for iii in range(len(gt_bboxes)):
-                    boxes_pred[iii].box = (
-                        boxes_pred[iii].box
-                        * 1
-                        / torch.tensor(
-                            [scale_y[iii], scale_x[iii], scale_y[iii], scale_x[iii]]
-                        )
-                    )
-                    mAP += (
-                        box_iou(gt_bboxes[iii], boxes_pred[iii].box).max(dim=1)[0].sum()
-                        / gt_bboxes[iii].shape[1]
-                    )
 
                 if args.normalized_l2:
                     with torch.no_grad():
                         num_objects = density_map.sum()
                 else:
                     num_objects = None
+
                 main_losses = criterion(outR, density_map, bboxes, num_objects)
-                aux_losses = [
-                    aux_criterion(aux, density_map, bboxes, num_objects)
-                    for aux in aux_R
-                ]
-                val_losses = {
-                    k: val_losses[k] + main_losses[k] * img.size(0)
-                    for k in val_losses.keys()
-                }
-                aux_val_losses = {
-                    k: aux_val_losses[k] + sum([a[k] for a in aux_losses]) * img.size(0)
-                    for k in aux_val_losses.keys()
-                }
-                val_ae += torch.abs(
-                    density_map.flatten(1).sum(dim=1) - outR.flatten(1).sum(dim=1)
-                ).sum()
+                aux_losses  = [aux_criterion(aux, density_map, bboxes, num_objects) for aux in aux_R]
+                det_loss    = det_criterion(location, tblr, targets)
+                del targets
+                loss = (sum([ml for ml in main_losses.values()]) * 0
+                        + sum([al for alls in aux_losses for al in alls.values()]) * 0
+                        + det_loss)  # + l
+
+                loss.backward()
+                if args.max_grad_norm > 0:
+                    nn.utils.clip_grad_norm_(model.parameters(), args.max_grad_norm)
+                optimizer.step()
+                train_losses        = { k: train_losses[k] + main_losses[k] * img.size(0) for k in train_losses.keys()}
+                aux_train_losses    = { k: aux_train_losses[k] + sum([a[k] for a in aux_losses]) * img.size(0)
+                                        for k in aux_train_losses.keys()}
+
+                train_ae += torch.abs(density_map.flatten(1).sum(dim=1) - outR.flatten(1).sum(dim=1)).sum()
+                # tqdm display the variation of loss
+                pbar.set_postfix(loss=loss.item())
+
+        model.eval()
+        with torch.no_grad():
+            with tqdm(val_loader, desc="Validation Progress", unit="batch") as pbar:
+                for img, bboxes, density_map, ids, scale_x, scale_y, _ in pbar:
+                    gt_bboxes, _    = val.get_gt_bboxes(ids)
+                    img             = img.to(device)
+                    bboxes          = bboxes.to(device)
+                    density_map     = density_map.to(device)
+                    optimizer.zero_grad()
+                    outR, aux_R, tblr, location = model(img, bboxes)
+                    boxes_pred                  = generate_bbox(outR, tblr)
+
+                    for iii in range(len(gt_bboxes)):
+                        boxes_pred[iii].box = (boxes_pred[iii].box * 1
+                            / torch.tensor([scale_y[iii], scale_x[iii], scale_y[iii], scale_x[iii]]))
+                        mAP += (box_iou(gt_bboxes[iii], boxes_pred[iii].box).max(dim=1)[0].sum()
+                            / gt_bboxes[iii].shape[1])
+
+                    if args.normalized_l2:
+                        with torch.no_grad():
+                            num_objects = density_map.sum()
+                    else:
+                        num_objects = None
+                    main_losses = criterion(outR, density_map, bboxes, num_objects)
+                    aux_losses  = [aux_criterion(aux, density_map, bboxes, num_objects) for aux in aux_R]
+                    val_losses  = {k: val_losses[k] + main_losses[k] * img.size(0) for k in val_losses.keys()}
+                    aux_val_losses = {  k: aux_val_losses[k] + sum([a[k] for a in aux_losses]) * img.size(0)
+                                        for k in aux_val_losses.keys()}
+                    val_ae += torch.abs(density_map.flatten(1).sum(dim=1) - outR.flatten(1).sum(dim=1)).sum()
+
+                    # tqdm display the variation of loss
+                    pbar.set_postfix(loss=loss.item())
 
         scheduler.step()
-
         end = perf_counter()
         best_epoch = False
+        # Change Path to save the checkpoint
+        path_dir = os.path.join(args.model_path, "detection_3")
+        os.makedirs(path_dir, exist_ok=True)
+        path_name = os.path.join(path_dir, f'{args.det_model_name}_{epoch}.pth')
+        trainable_state_dict = {name: param for name, param in model.named_parameters() if param.requires_grad}
+        checkpoint = {  "epoch": epoch,
+                        "box_predictor": trainable_state_dict,  # Save only the trainable parameters
+                        "optimizer": optimizer.state_dict(),
+                        "scheduler": scheduler.state_dict(),
+                        "best_val_ae": val_ae.item() / len(val),}
+        torch.save(checkpoint, path_name)
+        print("Epoch", epoch)
+        print("Train loss", {k: v.item() / len(train) for k, v in train_losses.items()})
+        print("Val loss", {k: v.item() / len(val) for k, v in val_losses.items()})
+        print("Train Aux loss", {k: v.item() / len(train) for k, v in aux_train_losses.items()})
+        print("Test Aux loss", {k: v.item() / len(val) for k, v in aux_val_losses.items()})
 
         if mAP > best_mAP:
             best_mAP = mAP
-            checkpoint = {
-                "epoch": epoch,
-                "model": model.state_dict(),
-                "optimizer": optimizer.state_dict(),
-                "scheduler": scheduler.state_dict(),
-                "best_val_ae": val_ae.item() / len(val),
-            }
-            torch.save(
-                checkpoint, os.path.join(args.model_path, f"{args.det_model_name}.pth")
-            )
             best_epoch = True
 
-        print("Epoch", epoch)
-        print({k: v.item() / len(train) for k, v in train_losses.items()})
-        print({k: v.item() / len(val) for k, v in val_losses.items()})
-        print({k: v.item() / len(train) for k, v in aux_train_losses.items()})
-        print({k: v.item() / len(val) for k, v in aux_val_losses.items()})
-        print(
-            train_ae.item() / len(train),
-            val_ae.item() / len(val),
-            end - start,
-            "best" if best_epoch else "",
-        )
+        print(  train_ae.item() / len(train), val_ae.item() / len(val), "best" if best_epoch else "")
         print("det_sc:", mAP / len(val))
-        print("********")
+        print("*****************************************")
+
+        epoch_data = {  "epoch": epoch,
+                        "Train loss": {k: v.item() / len(train) for k, v in train_losses.items()},
+                        "Val loss": {k: v.item() / len(val) for k, v in val_losses.items()},
+                        "Train Aux loss": {k: v.item() / len(train) for k, v in aux_train_losses.items()},
+                        "Test Aux loss": {k: v.item() / len(val) for k, v in aux_val_losses.items()},
+                        "Train ae": train_ae.item() / len(train),
+                        "Val ae": val_ae.item() / len(val),
+                        "best_epoch": best_epoch,
+                        "best_model_path": path_name if (best_epoch == True) else None }
+
+        json_filename = os.path.join(det_logdir, f"det_{epoch}.json")
+        with open(json_filename, 'w') as json_file:
+            json.dump(epoch_data, json_file, indent=4)
+        print(f"Epoch {epoch} information saved to {json_filename}")
 
     if args.skip_test:
         dist.destroy_process_group()

@@ -1,10 +1,13 @@
-#!/bin/bash
-export CUDA_VISIBLE_DEVICES=`python -m get_gpu`
-export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
-python3 /tmp2/b10902118/DAVE/main.py \
+export NCCL_DEBUG=INFO
+export NCCL_IB_DISABLE=1
+export NCCL_NET_GDR_DISABLE=1
+export NCCL_P2P_DISABLE=1
+export CUDA_VISIBLE_DEVICES=0
+
+python3 ./main.py \
 --skip_train \
---data_path /tmp2/b10902118/fsc \
---model_path /tmp2/b10902118/DAVE/checkpoints \
+--data_path /project/g/r13922043/dave_dataset/FSC147 \
+--model_path /project/g/r13922043/dave_model \
 --model_name DAVE_3_shot \
 --backbone resnet50 \
 --swav_backbone \
