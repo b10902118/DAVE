@@ -21,6 +21,7 @@ from .regression_head import DensityMapRegressor
 from .transformer import TransformerEncoder, TransformerDecoder
 from copy import deepcopy
 import time
+import matplotlib.pyplot as plt
 
 
 class COTR(nn.Module):
@@ -285,7 +286,7 @@ class COTR(nn.Module):
 
         return location
 
-    def predict_density_map(self, backbone_features, bboxes):
+    def predict_density_map(self, backbone_features, bboxes, name=""):
         # backbone feature :
         bs, _, bb_h, bb_w = backbone_features.size()
         # print("backbone_features.size()", backbone_features.size())  # 4, 3584, 64, 64
@@ -332,6 +333,7 @@ class COTR(nn.Module):
         # Extract the objectness
         if self.use_objectness and not self.zero_shot:
             box_hw = torch.zeros(bboxes.size(0), bboxes.size(1), 2).to(bboxes.device)
+            # Tried adjust size make obj more connected, but distroy density
             box_hw[:, :, 0] = bboxes[:, :, 2] - bboxes[:, :, 0]
             box_hw[:, :, 1] = bboxes[:, :, 3] - bboxes[:, :, 1]
             objectness = (
@@ -360,15 +362,19 @@ class COTR(nn.Module):
                 ],
                 dim=1,
             )
+            appearance = roi_align(
+                x,
+                boxes=bboxes,
+                output_size=self.kernel_dim,
+                spatial_scale=1.0 / self.reduction,
+                aligned=True,
+            )
+            # print(f"{appearance.shape=}")
+            # appearance = torch.cat([appearance, appearance])
+            # print(f"{appearance.shape=}")
+            # self.num_objects *= 2
             appearance = (
-                roi_align(
-                    x,
-                    boxes=bboxes,
-                    output_size=self.kernel_dim,
-                    spatial_scale=1.0 / self.reduction,
-                    aligned=True,
-                )
-                .permute(0, 2, 3, 1)
+                appearance.permute(0, 2, 3, 1)
                 .reshape(bs, self.num_objects * self.kernel_dim**2, -1)
                 .transpose(0, 1)
             )
@@ -415,6 +421,7 @@ class COTR(nn.Module):
 
         # print(f"{weights.size()=}") # 3, 27, 1, 256
         # weights.size(0) = 3 = num_decoder_layers
+        # plt.figure(figsize=(30, 10))
         for i in range(weights.size(0)):
             kernels = (
                 weights[i]
@@ -436,6 +443,13 @@ class COTR(nn.Module):
             correlation_maps = F.conv2d(**conv2d_params).view(
                 bs, self.num_objects, self.emb_dim, bb_h, bb_w
             )
+
+            # def to_cpu_numpy(arr):
+            #    if isinstance(arr, torch.Tensor):
+            #        return arr.cpu().numpy()
+            #    else:
+            #        return arr
+
             # print(f"{correlation_maps.shape=}") # 1, 3, 256, 64, 64
 
             if self.num_objects > 1 and not self.zero_shot:
@@ -446,18 +460,27 @@ class COTR(nn.Module):
             else:
                 correlation_maps = correlation_maps.max(dim=1)[0]
 
-            if i == weights.size(0) - 1:  # last iteration
+            if i == weights.size(0) - 1:  # last weights passes 3 layers
                 _x = self.regression_head(correlation_maps)
-                outputR = _x.clone()
+                outputR = _x.clone().detach()
+                # outputR = self.regression_head(
+                #    correlation_maps
+                # )  # clone detach computation graph
             else:
                 _x = self.aux_heads[i](correlation_maps)
 
+            # dmap_np = to_cpu_numpy(_x.clone().detach())
+            # plt.subplot(1, 3, i + 1)
+            # plt.imshow(dmap_np[0][0], cmap="viridis")
+
             outputs_R.append(_x)
+        # plt.savefig(f"corre_maps_{name}.png")
 
         return correlation_maps, outputs_R, outputR
 
     def forward(self, x_img, bboxes, name="", dmap=None, classes=None):
         self.num_objects = bboxes.shape[1]
+        # print(f"{self.num_objects=}")
         backbone_features = self.backbone(x_img)  # (batch_size, 2048, H/32, W/32)
         bs, _, bb_h, bb_w = backbone_features.size()
 
@@ -467,7 +490,7 @@ class COTR(nn.Module):
 
         # LOCA low-shot counter for density map prediction
         correlation_maps, outputs_R, outputR = self.predict_density_map(
-            backbone_features, bboxes
+            backbone_features, bboxes, name
         )
 
         if self.det_train:
@@ -548,7 +571,7 @@ class COTR(nn.Module):
 
         # Speed up, nothing changes
         if len(feat_pairs) > 500:
-            outputR_no_mask = outputR.clone()
+            outputR_no_mask = outputR.clone().detach()
             return outputR, outputR_no_mask, tblr, generated_bboxes
 
         # can be used to reduce memory consumption
@@ -661,7 +684,7 @@ class COTR(nn.Module):
 
                 exemplar_bboxes = generated_bboxes[mask[self.num_objects :]]
 
-            outputR_no_mask = outputR.clone()
+            outputR_no_mask = outputR.clone().detach()
             if mask is not None and np.any(mask == False):
                 outputR[0][0] = mask_density(outputR[0], exemplar_bboxes)
 

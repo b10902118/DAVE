@@ -523,7 +523,7 @@ class FSC147WithDensityMapSCALE2BOX(Dataset):
         return bboxes_xyxy, factors
 
     def __len__(self):
-        if self.custom_indices:
+        if self.custom_indices is not None:
             return len(self.custom_indices)
         return len(self.image_names)
 
