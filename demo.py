@@ -18,7 +18,7 @@ def on_click(event):
     global ix, iy
     ix, iy = event.xdata, event.ydata
     # Connect the release event
-    fig.canvas.mpl_connect("button_release_event", on_release)
+    fig.canvas.mpl_connect('button_release_event', on_release)
 
 
 def on_release(event):
@@ -29,7 +29,7 @@ def on_release(event):
     width = x - ix
     height = y - iy
     # Add a rectangle patch to the axes
-    rect = patches.Rectangle((ix, iy), width, height, edgecolor="r", facecolor="none")
+    rect = patches.Rectangle((ix, iy), width, height, edgecolor='r', facecolor='none')
     ax.add_patch(rect)
     # Store the bounding box coordinates
     bounding_boxes.append((ix, iy, ix + width, iy + height))
@@ -38,7 +38,8 @@ def on_release(event):
 
 @torch.no_grad()
 def demo(args):
-    img_path = "material//7.jpg"
+    #img_path = "material//746.jpg"
+    img_path = args.image
     global fig, ax
 
     gpu = 0
@@ -46,19 +47,16 @@ def demo(args):
     device = torch.device(gpu)
 
     model = DataParallel(
-        build_model(args).to(device), device_ids=[gpu], output_device=gpu
+        build_model(args).to(device),
+        device_ids=[gpu],
+        output_device=gpu
     )
     model.load_state_dict(
-        torch.load(os.path.join(args.model_path, "DAVE_3_shot.pth"))["model"],
-        strict=False,
+        torch.load(os.path.join(args.model_path, 'DAVE_3_shot.pth'))['model'], strict=False
     )
-    pretrained_dict_feat = {
-        k.split("feat_comp.")[1]: v
-        for k, v in torch.load(os.path.join(args.model_path, "verification.pth"))[
-            "model"
-        ].items()
-        if "feat_comp" in k
-    }
+    pretrained_dict_feat = {k.split("feat_comp.")[1]: v for k, v in
+                            torch.load(os.path.join(args.model_path, 'verification.pth'))[
+                                'model'].items() if 'feat_comp' in k}
     model.module.feat_comp.load_state_dict(pretrained_dict_feat)
     model.eval()
 
@@ -67,7 +65,7 @@ def demo(args):
     fig, ax = plt.subplots(1)
     ax.imshow(image)
     # Connect the click event
-    cid = fig.canvas.mpl_connect("button_press_event", on_click)
+    cid = fig.canvas.mpl_connect('button_press_event', on_click)
     plt.title("Click and drag to draw bboxes, then close window")
     # Show the image
     plt.show()
@@ -79,31 +77,27 @@ def demo(args):
     bboxes = bboxes.unsqueeze(0).to(device)
 
     denisty_map, _, tblr, predicted_bboxes = model(img, bboxes=bboxes)
+    
+    #plt.imshow(denisty_map[0,0].detach().cpu().numpy(), cmap='hot', interpolation='nearest') 
+    #plt.colorbar()
+    #plt.title('Density Map')
+    #plt.show()
+
+
 
     plt.clf()
     plt.imshow(image)
-    pred_boxes = predicted_bboxes.box.cpu() / torch.tensor(
-        [scale[0], scale[1], scale[0], scale[1]]
-    )
+    pred_boxes = predicted_bboxes.box.cpu() / torch.tensor([scale[0], scale[1], scale[0], scale[1]])
     for i in range(len(pred_boxes)):
         box = pred_boxes[i]
 
-        plt.plot(  # x0 y0 x1 y1
-            [box[0], box[0], box[2], box[2], box[0]],
-            [box[1], box[3], box[3], box[1], box[1]],
-            linewidth=2,
-            color="red",
-        )
-    plt.title(
-        "Dmap count:"
-        + str(round(denisty_map.sum().item(), 1))
-        + " Box count:"
-        + str(len(pred_boxes))
-    )
+        plt.plot([box[0], box[0], box[2], box[2], box[0]], [box[1], box[3], box[3], box[1], box[1]], linewidth=2,
+                 color='red')
+    plt.title("Dmap count:" + str(round(denisty_map.sum().item(), 1)) + " Box count:" + str(len(pred_boxes)))
     plt.show()
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser("DAVE", parents=[get_argparser()])
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser('DAVE', parents=[get_argparser()])
     args = parser.parse_args()
     demo(args)
